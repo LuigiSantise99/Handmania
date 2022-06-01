@@ -10,6 +10,6 @@ Todo:
 '''
 
 from .from_simfile import from_simfile
-from .errors.song_has_synchronous_notes_error import SongWithSynchronousNotesError
+from .errors.song_has_unsupported_notes_error import SongWithUnsupportedNotesError
 from .errors.invalid_file_error import InvalidFileError
 from .errors.wanted_chart_not_found_error import WantedChartNotFoundError

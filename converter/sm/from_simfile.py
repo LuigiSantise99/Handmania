@@ -1,7 +1,7 @@
 import simfile
 from typing import Any, Dict, List
 
-from sm.errors.song_has_synchronous_notes_error import SongWithSynchronousNotesError
+from sm.errors.song_has_unsupported_notes_error import SongWithUnsupportedNotesError
 from sm.errors.invalid_file_error import InvalidFileError
 from sm.errors.wanted_chart_not_found_error import WantedChartNotFoundError
 
@@ -45,10 +45,9 @@ def from_simfile(desatination: str, strict: bool = True) -> Dict[str, Any]:
         raise InvalidFileError(desatination)
 
     notes: List[List[str]] = _get_beginner_chart_notes(file.charts)
-    synchornous_notes: str = _there_are_synchronous_notes(notes)
 
-    if strict and synchornous_notes != None:
-        raise SongWithSynchronousNotesError(synchornous_notes)
+    if strict and not _is_a_valid_chart(notes):
+        raise SongWithUnsupportedNotesError()
 
     return {
         'title': file.title,
@@ -92,33 +91,19 @@ def _get_beginner_chart_notes(charts: List[simfile.base.BaseChart]) -> List[List
     raise WantedChartNotFoundError()
 
 
-def _there_are_synchronous_notes(chart: List[List[str]]) -> str:
-    '''Checks if there are synchronous notes.
+def _is_a_valid_chart(chart: List[List[str]]) -> str:
+    '''Checks if there are unsupported notes.
 
     Args:
         chart (List[List[str]]): The notes of the song.
 
     Returns:
-        str: The synchronous notes.
+        bool: True if the chart does not have unsupported notes, False otherwise.
     '''
-    open_hold_note: bool = False
 
     for note_groups in chart:
         for notes_string in note_groups:
-            notes: List[str] = list(notes_string)
-
-            if notes.count('1') > 1 or notes.count('2') > 1 or notes.count('3') > 1 or notes.count('4') > 0 or\
-                notes.count('1') == 1 and notes.count('2') > 0 or notes.count('2') == 1 and notes.count('1') > 0:
-                return notes_string
+            if '4' in notes_string:
+                return False
             
-            if notes.count('3') == 1:
-                open_hold_note = False
-
-            if notes.count('2') == 1:
-                open_hold_note = True
-                continue
-            
-            if open_hold_note and (notes.count('3') == 0 and (notes.count('1') == 1 or notes.count('2') == 1)):
-                return notes_string
-            
-    return None
+    return True
