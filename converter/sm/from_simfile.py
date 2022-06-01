@@ -25,8 +25,7 @@ def from_simfile(desatination: str, strict: bool = True) -> Dict[str, Any]:
                 'bpms': 180.00,
                 'notes': [
                     ['0000', '0000', '0000', '0000']
-                ],
-                'src': _b64encode_song(song.ogg)
+                ]
             }
 
     Raises:
@@ -56,8 +55,7 @@ def from_simfile(desatination: str, strict: bool = True) -> Dict[str, Any]:
         'start': file.samplestart,
         'length': file.samplelength,
         'bpms': file.bpms,
-        'notes': notes,
-        'src': ''
+        'notes': notes
     }
 
 
