@@ -3,4 +3,4 @@ class WantedChartNotFoundError(Exception):
     '''
 
     def __init__(self) -> None:
-        super().__init__('There is not single palyer beginner chart for the song')
+        super().__init__('There is not the single palyer beginner chart for the song')

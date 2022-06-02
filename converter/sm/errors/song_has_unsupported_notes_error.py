@@ -3,4 +3,4 @@ class SongWithUnsupportedNotesError(Exception):
     '''
 
     def __init__(self) -> None:
-        super().__init__('There song has unsupported notes at some point')
+        super().__init__('The song has unsupported notes at some point')

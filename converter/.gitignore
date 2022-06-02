@@ -73,7 +73,8 @@ venv.bak/
 .idea/
 .vscode/
 
-# Song files.
-songs/*
-!songs/.gitkeep
-converted/*.json
+# Song files
+inout/songs/
+!inout/songs/.gitkeep
+inout/converted/
+!inout/converted/.gitkeep
