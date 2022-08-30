@@ -14,6 +14,7 @@
 		491D15B82865EF9500786AF8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 491D15B72865EF9500786AF8 /* Preview Assets.xcassets */; };
 		491D4728286F078100565982 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491D4727286F078000565982 /* Model.swift */; };
 		491D472B286F09DD00565982 /* AVCaptureVideoPreviewLayerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491D472A286F09DD00565982 /* AVCaptureVideoPreviewLayerAdapter.swift */; };
+		4961FEC028BE5482008A6502 /* Directions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4961FEBF28BE5482008A6502 /* Directions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		491D15B72865EF9500786AF8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		491D4727286F078000565982 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		491D472A286F09DD00565982 /* AVCaptureVideoPreviewLayerAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVCaptureVideoPreviewLayerAdapter.swift; sourceTree = "<group>"; };
+		4961FEBF28BE5482008A6502 /* Directions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Directions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 				491D15B42865EF9500786AF8 /* Assets.xcassets */,
 				491D15B62865EF9500786AF8 /* Preview Content */,
 				491114E6286EF474002AB556 /* CameraManager.swift */,
+				4961FEBF28BE5482008A6502 /* Directions.swift */,
 			);
 			path = handmania;
 			sourceTree = "<group>";
@@ -155,6 +158,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				491D472B286F09DD00565982 /* AVCaptureVideoPreviewLayerAdapter.swift in Sources */,
+				4961FEC028BE5482008A6502 /* Directions.swift in Sources */,
 				491D15B32865EF9400786AF8 /* ContentView.swift in Sources */,
 				491D15B12865EF9400786AF8 /* handmaniaApp.swift in Sources */,
 				491114E7286EF474002AB556 /* CameraManager.swift in Sources */,

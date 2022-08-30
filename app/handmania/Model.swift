@@ -14,6 +14,9 @@ class Model: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     let captureSession = AVCaptureSession()
     private let videoDataOutput = AVCaptureVideoDataOutput()
     
+    // TODO: massimo una sola faccia.
+    var numberOfFaces = 0
+    
     override init() {
         super.init()
         self.addCameraInput()
@@ -44,15 +47,38 @@ class Model: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
     private func detectFace(in image: CVPixelBuffer) {
         let faceDetectionRequest = VNDetectFaceLandmarksRequest(completionHandler: { (request: VNRequest, error: Error?) in
             DispatchQueue.main.async {
-                if let results = request.results as? [VNFaceObservation], results.count > 0 {
-                    print(results.first!.landmarks!.nose!)
-                } else {
-                    print("did not detect any face")
+                if let results = request.results as? [VNFaceObservation] {
+                    self.numberOfFaces = results.count
+                    
+                    if results.count == 1 {
+                        print("faced detected")
+                    } else if results.count == 0 {
+                        print("no faces detected")
+                    } else {
+                        print("more than one face detected")
+                    }
                 }
             }
         })
+
         let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: image, orientation: .leftMirrored, options: [:])
         try? imageRequestHandler.perform([faceDetectionRequest])
+    }
+    
+    private func detectHands(in image: CVPixelBuffer) {
+        let handDetectionRequest = VNDetectHumanHandPoseRequest(completionHandler: { (request: VNRequest, error: Error?) in
+            DispatchQueue.main.async {
+                if let results = request.results as? [VNHumanHandPoseObservation], results.count > 0 {
+                    print("\(results.count) hands detected")
+                } else {
+                    print("did not detect any hands")
+                }
+            }
+        })
+        handDetectionRequest.maximumHandCount = 2
+        
+        let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: image, orientation: .leftMirrored, options: [:])
+        try? imageRequestHandler.perform([handDetectionRequest])
     }
     
     func captureOutput(_ output: AVCaptureOutput,
@@ -63,6 +89,7 @@ class Model: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
             return
         }
         self.detectFace(in: frame)
+        self.detectHands(in: frame)
     }
     
     public static func getInstance() -> Model {
