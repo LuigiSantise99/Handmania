@@ -6,18 +6,19 @@
 //
 
 import SwiftUI
-import AVFoundation
 
 struct ContentView: View {
-    let directionsModel = DirectionsModel.getInstance()
-    
     @StateObject var cameraManager = CameraManager()
     @State var permissionGranted = false
+    @StateObject var directionModel = DirectionsModel.getInstance()
     
     var body: some View {
         VStack {
             if cameraManager.permissionGranted {
-                AVCaptureVideoPreviewLayerAdapter(session: directionsModel.captureSession)
+                ZStack {                    AVCaptureVideoPreviewLayerAdapter(session: directionModel.captureSession)
+                    
+                    DirectionBoxesView(directionsModel: directionModel)
+                }
             } else {
                 Text("Per utilizzare l'applicazione devi fornire i permessi della camera")
             }
@@ -25,7 +26,7 @@ struct ContentView: View {
             permissionGranted = granted
         }).onAppear {
             cameraManager.requestPermission()
-            directionsModel.captureSession.startRunning()
+            directionModel.captureSession.startRunning()
         }
     }
 }

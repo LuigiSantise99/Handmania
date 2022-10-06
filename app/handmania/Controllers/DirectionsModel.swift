@@ -9,12 +9,12 @@ import Foundation
 import AVFoundation
 import Vision
 
-class DirectionsModel: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
+class DirectionsModel: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, ObservableObject {
     private static var INSTANCE: DirectionsModel? = nil
     let captureSession = AVCaptureSession()
     private let videoDataOutput = AVCaptureVideoDataOutput()
     
-    private var directionBoxes: [Directions : DirectionBox]?
+    @Published var directionBoxes: [Directions : DirectionBox]?
     
     override init() {
         super.init()
@@ -46,7 +46,7 @@ class DirectionsModel: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate {
         connection.videoOrientation = .portrait
     }
     
-    private func initializeDirectionBoxes(faceBox: CGRect) {
+    @MainActor private func initializeDirectionBoxes(faceBox: CGRect) {
         let faceBoxTopLeft = VNPoint(x: faceBox.minX, y: faceBox.minY)
         let faceBoxTopRight = VNPoint(x: faceBox.minX, y: faceBox.maxY)
         let faceBoxBottomLeft = VNPoint(x: faceBox.maxX, y: faceBox.minY)

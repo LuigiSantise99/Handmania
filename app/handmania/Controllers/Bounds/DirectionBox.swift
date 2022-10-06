@@ -9,7 +9,9 @@ import Foundation
 import Vision
 import UIKit
 
-struct DirectionBox {
+struct DirectionBox: Identifiable {
+    let id = UUID()
+    
     private let path = UIBezierPath()
     
     init(p1: VNPoint, p2: VNPoint, p3: VNPoint, p4: VNPoint) {
@@ -18,6 +20,10 @@ struct DirectionBox {
         path.addLine(to: p3.location)
         path.addLine(to: p4.location)
         path.close()
+    }
+    
+    func getPath() -> UIBezierPath {
+        return self.path
     }
     
     func contains(point: VNPoint) -> Bool {
