@@ -28,6 +28,8 @@ struct ContentView: View {
             cameraManager.requestPermission()
             directionModel.captureSession.startRunning()
         }
+        
+        // TODO: implement orientation change handler.
     }
 }
 

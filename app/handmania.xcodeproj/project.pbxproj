@@ -18,7 +18,8 @@
 		491D472B286F09DD00565982 /* AVCaptureVideoPreviewLayerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491D472A286F09DD00565982 /* AVCaptureVideoPreviewLayerAdapter.swift */; };
 		4943C8AE28EC7CDC00E00FF8 /* UIBezierPathAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4943C8AD28EC7CDC00E00FF8 /* UIBezierPathAdapter.swift */; };
 		4943C8B128EC88EF00E00FF8 /* DirectionBoxesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4943C8B028EC88EF00E00FF8 /* DirectionBoxesView.swift */; };
-		4961FEC028BE5482008A6502 /* Directions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4961FEBF28BE5482008A6502 /* Directions.swift */; };
+		4961FEC028BE5482008A6502 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4961FEBF28BE5482008A6502 /* Direction.swift */; };
+		499ED99C28EECD4C00336315 /* HandDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499ED99B28EECD4C00336315 /* HandDirection.swift */; };
 		49B78B3028E5F05700AF1716 /* DirectionsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B78B2F28E5F05700AF1716 /* DirectionsModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -35,7 +36,8 @@
 		491D472A286F09DD00565982 /* AVCaptureVideoPreviewLayerAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVCaptureVideoPreviewLayerAdapter.swift; sourceTree = "<group>"; };
 		4943C8AD28EC7CDC00E00FF8 /* UIBezierPathAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBezierPathAdapter.swift; sourceTree = "<group>"; };
 		4943C8B028EC88EF00E00FF8 /* DirectionBoxesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionBoxesView.swift; sourceTree = "<group>"; };
-		4961FEBF28BE5482008A6502 /* Directions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Directions.swift; sourceTree = "<group>"; };
+		4961FEBF28BE5482008A6502 /* Direction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
+		499ED99B28EECD4C00336315 /* HandDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandDirection.swift; sourceTree = "<group>"; };
 		49B78B2F28E5F05700AF1716 /* DirectionsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionsModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -129,7 +131,8 @@
 		49B78B3128E5F05E00AF1716 /* Outputs */ = {
 			isa = PBXGroup;
 			children = (
-				4961FEBF28BE5482008A6502 /* Directions.swift */,
+				4961FEBF28BE5482008A6502 /* Direction.swift */,
+				499ED99B28EECD4C00336315 /* HandDirection.swift */,
 			);
 			path = Outputs;
 			sourceTree = "<group>";
@@ -208,12 +211,13 @@
 				4943C8AE28EC7CDC00E00FF8 /* UIBezierPathAdapter.swift in Sources */,
 				491B9C0828E6E5E5006F6311 /* DirectionBox.swift in Sources */,
 				491D472B286F09DD00565982 /* AVCaptureVideoPreviewLayerAdapter.swift in Sources */,
-				4961FEC028BE5482008A6502 /* Directions.swift in Sources */,
+				4961FEC028BE5482008A6502 /* Direction.swift in Sources */,
 				491D15B32865EF9400786AF8 /* ContentView.swift in Sources */,
 				491D15B12865EF9400786AF8 /* handmaniaApp.swift in Sources */,
 				4943C8B128EC88EF00E00FF8 /* DirectionBoxesView.swift in Sources */,
 				49B78B3028E5F05700AF1716 /* DirectionsModel.swift in Sources */,
 				491114E7286EF474002AB556 /* CameraManager.swift in Sources */,
+				499ED99C28EECD4C00336315 /* HandDirection.swift in Sources */,
 				491D4728286F078100565982 /* Model.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

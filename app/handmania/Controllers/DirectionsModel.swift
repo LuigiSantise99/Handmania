@@ -14,7 +14,11 @@ class DirectionsModel: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, O
     let captureSession = AVCaptureSession()
     private let videoDataOutput = AVCaptureVideoDataOutput()
     
-    @Published var directionBoxes: [Directions : DirectionBox]?
+    @Published var directionBoxes: [Direction : DirectionBox]?
+    @Published var hands = [
+        HandDirection(direction: Direction.neutral, timestamp: Date()),
+        HandDirection(direction: Direction.neutral, timestamp: Date())
+    ]
     
     override init() {
         super.init()
@@ -46,17 +50,16 @@ class DirectionsModel: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, O
         connection.videoOrientation = .portrait
     }
     
-    @MainActor private func initializeDirectionBoxes(faceBox: CGRect) {
-        let faceBoxTopLeft = VNPoint(x: faceBox.minX, y: faceBox.minY)
-        let faceBoxTopRight = VNPoint(x: faceBox.minX, y: faceBox.maxY)
-        let faceBoxBottomLeft = VNPoint(x: faceBox.maxX, y: faceBox.minY)
-        let faceBoxBottomRight = VNPoint(x: faceBox.maxX, y: faceBox.maxY)
-        
+    @MainActor private func clearDirectionBoxes() {
+        self.directionBoxes = nil
+    }
+    
+    @MainActor private func initializeDirectionBoxes(faceBoxTopLeft: VNPoint, faceBoxTopRight: VNPoint, faceBoxBottomLeft: VNPoint, faceBoxBottomRight: VNPoint) {
         self.directionBoxes = [
-            Directions.left: DirectionBox(p1: ScreenBounds.topLeft, p2: faceBoxTopLeft, p3: faceBoxBottomLeft, p4: ScreenBounds.bottomLeft),
-            Directions.right: DirectionBox(p1: ScreenBounds.topRight, p2: faceBoxTopRight, p3: faceBoxBottomRight, p4: ScreenBounds.bottomRight),
-            Directions.up: DirectionBox(p1: ScreenBounds.topLeft, p2: faceBoxTopLeft, p3: faceBoxTopRight, p4: ScreenBounds.topRight),
-            Directions.down: DirectionBox(p1: ScreenBounds.bottomLeft, p2: faceBoxBottomLeft, p3: faceBoxBottomRight, p4: ScreenBounds.bottomRight)
+            Direction.left: DirectionBox(p1: ScreenBounds.topLeft, p2: faceBoxTopLeft, p3: faceBoxBottomLeft, p4: ScreenBounds.bottomLeft),
+            Direction.right: DirectionBox(p1: ScreenBounds.topRight, p2: faceBoxTopRight, p3: faceBoxBottomRight, p4: ScreenBounds.bottomRight),
+            Direction.up: DirectionBox(p1: ScreenBounds.topLeft, p2: faceBoxTopLeft, p3: faceBoxTopRight, p4: ScreenBounds.topRight),
+            Direction.down: DirectionBox(p1: ScreenBounds.bottomLeft, p2: faceBoxBottomLeft, p3: faceBoxBottomRight, p4: ScreenBounds.bottomRight)
         ]
     }
     
@@ -66,10 +69,16 @@ class DirectionsModel: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, O
                 if let results = request.results as? [VNFaceObservation] {
                     if results.count == 1 {
                         print("face detected")
-                        self.initializeDirectionBoxes(faceBox: results.first!.boundingBox)
+                        let faceBox = results.first!.boundingBox
+                        self.initializeDirectionBoxes(
+                            faceBoxTopLeft: VNPoint(x: faceBox.minX, y: faceBox.minY),
+                            faceBoxTopRight: VNPoint(x: faceBox.minX, y: faceBox.maxY),
+                            faceBoxBottomLeft: VNPoint(x: faceBox.maxX, y: faceBox.minY),
+                            faceBoxBottomRight: VNPoint(x: faceBox.maxX, y: faceBox.maxY)
+                        )
                     } else {
                         print("no or more faces detected")
-                        self.directionBoxes = nil
+                        self.clearDirectionBoxes()
                     }
                 }
             }
@@ -95,27 +104,84 @@ class DirectionsModel: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, O
         return VNPoint(x: meanX, y: meanY)
     }
     
-    private func detectDirection(handPosition: VNPoint) {
+    private func detectDirection(handPosition: VNPoint) -> Direction {
         guard let targetBoxes = self.directionBoxes else {
             print("only hands detected")
-            return
+            return Direction.neutral
         }
         
-        let result = targetBoxes.filter{ $0.1.contains(point: handPosition) }.map{ $0.0 }.first ?? Directions.neutral
+        let result = targetBoxes.filter{ $0.1.contains(point: handPosition) }.map{ $0.0 }.first ?? Direction.neutral
         print(result)
+        
+        return result
+    }
+    
+    func printDetectedHandDirections() {
+        for hand in self.hands {
+            print(hand)
+        }
+    }
+    
+    @MainActor private func initializeHandDirections(hands: [HandDirection]) {
+        self.hands = hands
+    }
+    
+    private func generateUpdatedHandDirections(directions: [Direction]) -> [HandDirection]? {
+        guard directions.count == 2 else {
+            print("invalid number of directions")
+            return nil
+        }
+        
+        let timestamp = Date()
+        var update = [
+            HandDirection(direction: directions[0], timestamp: timestamp),
+            HandDirection(direction: directions[1], timestamp: timestamp)
+        ]
+        
+        for (i, value) in update.enumerated() {
+            let equals = self.hands.filter{ $0.direction == value.direction }
+            let j = self.hands.firstIndex{ $0.timestamp == equals.map{ $0.timestamp }.min() } ?? -1
+
+            if j > -1 {
+                update[i].timestamp = self.hands[j].timestamp
+            }
+        }
+        
+        printDetectedHandDirections()
+        return update
+    }
+    
+    private func detectHandDirections(results: [VNHumanHandPoseObservation]) -> [Direction] {
+        print("\(results.count) hands detected")
+        
+        if results.count <= 0 {
+            print("no hands detected")
+            return [Direction.neutral, Direction.neutral]
+        }
+        
+        var directions = [Direction]()
+        
+        for result in results {
+            directions.append(self.detectDirection(handPosition: self.getHandMiddlePoint(recognitionResult: result)))
+        }
+        
+        // If a hand is not detected, it means it is in a neutral position.
+        if directions.count < 2 {
+            directions.append(Direction.neutral)
+        }
+        
+        return directions
     }
     
     private func detectHands(in image: CVPixelBuffer) {
         let handDetectionRequest = VNDetectHumanHandPoseRequest(completionHandler: { (request: VNRequest, error: Error?) in
             DispatchQueue.main.async {
-                if let results = request.results as? [VNHumanHandPoseObservation], results.count > 0 {
-                    print("\(results.count) hands detected")
+                if let results = request.results as? [VNHumanHandPoseObservation] {
+                    let directions = self.detectHandDirections(results: results)
                     
-                    for result in results {
-                        self.detectDirection(handPosition: self.getHandMiddlePoint(recognitionResult: result))
+                    if let newDirections = self.generateUpdatedHandDirections(directions: directions) {
+                        self.initializeHandDirections(hands: newDirections)
                     }
-                } else {
-                    print("no hands detected")
                 }
             }
         })
