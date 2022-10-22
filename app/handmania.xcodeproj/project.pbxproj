@@ -20,6 +20,7 @@
 		4943C8B128EC88EF00E00FF8 /* DirectionBoxesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4943C8B028EC88EF00E00FF8 /* DirectionBoxesView.swift */; };
 		4961FEC028BE5482008A6502 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4961FEBF28BE5482008A6502 /* Direction.swift */; };
 		499ED99C28EECD4C00336315 /* HandDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499ED99B28EECD4C00336315 /* HandDirection.swift */; };
+		49B47C9C290301BE0058BF2F /* AVCaptureVideoOrientationFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B47C9B290301BE0058BF2F /* AVCaptureVideoOrientationFactory.swift */; };
 		49B78B3028E5F05700AF1716 /* DirectionsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B78B2F28E5F05700AF1716 /* DirectionsModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -38,6 +39,7 @@
 		4943C8B028EC88EF00E00FF8 /* DirectionBoxesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionBoxesView.swift; sourceTree = "<group>"; };
 		4961FEBF28BE5482008A6502 /* Direction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
 		499ED99B28EECD4C00336315 /* HandDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandDirection.swift; sourceTree = "<group>"; };
+		49B47C9B290301BE0058BF2F /* AVCaptureVideoOrientationFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVCaptureVideoOrientationFactory.swift; sourceTree = "<group>"; };
 		49B78B2F28E5F05700AF1716 /* DirectionsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionsModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -80,6 +82,7 @@
 		491D15AF2865EF9400786AF8 /* handmania */ = {
 			isa = PBXGroup;
 			children = (
+				49B47C9A2903018C0058BF2F /* Factories */,
 				4943C8AF28EC88D800E00FF8 /* Views */,
 				491D4729286F09AB00565982 /* Adapters */,
 				49B78B2E28E5F01600AF1716 /* Controllers */,
@@ -115,6 +118,14 @@
 				4943C8B028EC88EF00E00FF8 /* DirectionBoxesView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		49B47C9A2903018C0058BF2F /* Factories */ = {
+			isa = PBXGroup;
+			children = (
+				49B47C9B290301BE0058BF2F /* AVCaptureVideoOrientationFactory.swift */,
+			);
+			path = Factories;
 			sourceTree = "<group>";
 		};
 		49B78B2E28E5F01600AF1716 /* Controllers */ = {
@@ -208,6 +219,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				491B9C0A28E6FF5E006F6311 /* ScreenBounds.swift in Sources */,
+				49B47C9C290301BE0058BF2F /* AVCaptureVideoOrientationFactory.swift in Sources */,
 				4943C8AE28EC7CDC00E00FF8 /* UIBezierPathAdapter.swift in Sources */,
 				491B9C0828E6E5E5006F6311 /* DirectionBox.swift in Sources */,
 				491D472B286F09DD00565982 /* AVCaptureVideoPreviewLayerAdapter.swift in Sources */,
@@ -350,12 +362,11 @@
 				DEVELOPMENT_TEAM = NTBQKVM33T;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSCameraUsageDescription = "$(PRODUCT_NAME) detect user face and hand position";
+				INFOPLIST_KEY_NSCameraUsageDescription = "handmania detect user face and hand position";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -381,12 +392,11 @@
 				DEVELOPMENT_TEAM = NTBQKVM33T;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSCameraUsageDescription = "$(PRODUCT_NAME) detect user face and hand position";
+				INFOPLIST_KEY_NSCameraUsageDescription = "handmania detect user face and hand position";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

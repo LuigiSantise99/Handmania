@@ -12,18 +12,28 @@ import UIKit
 struct DirectionBox: Identifiable {
     let id = UUID()
     
-    private let path = UIBezierPath()
+    let p1: CGPoint
+    let p2: CGPoint
+    let p3: CGPoint
+    let p4: CGPoint
     
-    init(p1: VNPoint, p2: VNPoint, p3: VNPoint, p4: VNPoint) {
-        path.move(to: p1.location)
-        path.addLine(to: p2.location)
-        path.addLine(to: p3.location)
-        path.addLine(to: p4.location)
+    let path = UIBezierPath()
+    
+    private func initializeUIBezierPath() {
+        path.move(to: self.p1)
+        path.addLine(to: self.p2)
+        path.addLine(to: self.p3)
+        path.addLine(to: self.p4)
         path.close()
     }
     
-    func getPath() -> UIBezierPath {
-        return self.path
+    init(p1: VNPoint, p2: VNPoint, p3: VNPoint, p4: VNPoint) {
+        self.p1 = p1.location
+        self.p2 = p2.location
+        self.p3 = p3.location
+        self.p4 = p4.location
+        
+        initializeUIBezierPath()
     }
     
     func contains(point: VNPoint) -> Bool {

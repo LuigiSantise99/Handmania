@@ -8,6 +8,7 @@
 import Foundation
 import AVFoundation
 import Vision
+import UIKit
 
 class DirectionsModel: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, ObservableObject {
     private static var INSTANCE: DirectionsModel? = nil
@@ -20,10 +21,8 @@ class DirectionsModel: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, O
         HandDirection(direction: Direction.neutral, timestamp: Date())
     ]
     
-    override init() {
-        super.init()
-        self.addCameraInput()
-        self.getCameraFrames()
+    private func getCurrentUIInterfaceOrientation() -> UIInterfaceOrientation? {
+        return UIApplication.shared.connectedScenes.filter{ $0.activationState == .foregroundActive }.first(where: { $0 is UIWindowScene }).flatMap{ $0 as? UIWindowScene }?.windows.first(where: \.isKeyWindow)?.windowScene?.interfaceOrientation
     }
     
     private func addCameraInput() {
@@ -39,15 +38,27 @@ class DirectionsModel: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, O
         self.captureSession.addInput(cameraInput)
     }
     
-    private func getCameraFrames() {
+    func setVideoOrientation(orientation: AVCaptureVideoOrientation) {
+        guard let connection = self.videoDataOutput.connection(with: AVMediaType.video),
+              connection.isVideoOrientationSupported else { return }
+        connection.videoOrientation = orientation
+    }
+    
+    private func getCameraFrames(orientation: AVCaptureVideoOrientation) {
         self.videoDataOutput.videoSettings = [(kCVPixelBufferPixelFormatTypeKey as NSString) : NSNumber(value: kCVPixelFormatType_32BGRA)] as [String : Any]
         self.videoDataOutput.alwaysDiscardsLateVideoFrames = true
         self.videoDataOutput.setSampleBufferDelegate(self, queue: DispatchQueue(label: "camera_frame_processing_queue"))
         self.captureSession.addOutput(self.videoDataOutput)
         
-        guard let connection = self.videoDataOutput.connection(with: AVMediaType.video),
-              connection.isVideoOrientationSupported else { return }
-        connection.videoOrientation = .portrait
+        self.setVideoOrientation(orientation: orientation)
+    }
+    
+    func startCaptureSession() {
+        if let currentInterfaceOrientation = self.getCurrentUIInterfaceOrientation() {
+            self.addCameraInput()
+            self.getCameraFrames(orientation: AVCaptureVideoOrientationFactory.fromUIInterfaceOrientation(orientation: currentInterfaceOrientation))
+            self.captureSession.startRunning()
+        }
     }
     
     @MainActor private func clearDirectionBoxes() {
@@ -71,10 +82,10 @@ class DirectionsModel: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, O
                         print("face detected")
                         let faceBox = results.first!.boundingBox
                         self.initializeDirectionBoxes(
-                            faceBoxTopLeft: VNPoint(x: faceBox.minX, y: faceBox.minY),
-                            faceBoxTopRight: VNPoint(x: faceBox.minX, y: faceBox.maxY),
-                            faceBoxBottomLeft: VNPoint(x: faceBox.maxX, y: faceBox.minY),
-                            faceBoxBottomRight: VNPoint(x: faceBox.maxX, y: faceBox.maxY)
+                            faceBoxTopLeft: VNPoint(x: faceBox.minX, y: faceBox.maxY),
+                            faceBoxTopRight: VNPoint(x: faceBox.maxX, y: faceBox.maxY),
+                            faceBoxBottomLeft: VNPoint(x: faceBox.minX, y: faceBox.minY),
+                            faceBoxBottomRight: VNPoint(x: faceBox.maxX, y: faceBox.minY)
                         )
                     } else {
                         print("no or more faces detected")
@@ -84,7 +95,7 @@ class DirectionsModel: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, O
             }
         })
 
-        let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: image, orientation: .leftMirrored, options: [:])
+        let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: image, orientation: .upMirrored, options: [:])
         try? imageRequestHandler.perform([faceDetectionRequest])
     }
     
@@ -100,7 +111,7 @@ class DirectionsModel: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, O
         
         let meanX = landmarks.map{ $0.x }.reduce(0, +) / Float64(landmarks.count)
         let meanY = landmarks.map{ $0.y }.reduce(0, +) / Float64(landmarks.count)
-        
+
         return VNPoint(x: meanX, y: meanY)
     }
     
@@ -111,7 +122,6 @@ class DirectionsModel: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, O
         }
         
         let result = targetBoxes.filter{ $0.1.contains(point: handPosition) }.map{ $0.0 }.first ?? Direction.neutral
-        print(result)
         
         return result
     }
@@ -187,7 +197,7 @@ class DirectionsModel: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, O
         })
         handDetectionRequest.maximumHandCount = 2
         
-        let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: image, orientation: .leftMirrored, options: [:])
+        let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: image, orientation: .upMirrored, options: [:])
         try? imageRequestHandler.perform([handDetectionRequest])
     }
     

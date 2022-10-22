@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject var cameraManager = CameraManager()
-    @State var permissionGranted = false
-    @StateObject var directionModel = DirectionsModel.getInstance()
+    @StateObject private var cameraManager = CameraManager()
+    @State private var permissionGranted = false
+    @StateObject private var directionModel = DirectionsModel.getInstance()
     
     var body: some View {
         VStack {
@@ -22,14 +22,14 @@ struct ContentView: View {
             } else {
                 Text("Per utilizzare l'applicazione devi fornire i permessi della camera")
             }
-        }.onReceive(cameraManager.$permissionGranted, perform: { (granted) in
+        }.onReceive(cameraManager.$permissionGranted, perform: { granted in
             permissionGranted = granted
+        }).onReceive(NotificationCenter.Publisher(center: .default, name: UIDevice.orientationDidChangeNotification), perform: { _ in
+            directionModel.setVideoOrientation(orientation: AVCaptureVideoOrientationFactory.fromUIDeviceOrientation(orientation: UIDevice.current.orientation))
         }).onAppear {
             cameraManager.requestPermission()
-            directionModel.captureSession.startRunning()
+            directionModel.startCaptureSession()
         }
-        
-        // TODO: implement orientation change handler.
     }
 }
 
