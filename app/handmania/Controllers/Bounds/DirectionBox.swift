@@ -7,7 +7,7 @@
 
 import Foundation
 import Vision
-import UIKit
+import SwiftUI
 
 struct DirectionBox: Identifiable {
     let id = UUID()
@@ -17,14 +17,13 @@ struct DirectionBox: Identifiable {
     let p3: CGPoint
     let p4: CGPoint
     
-    let path = UIBezierPath()
+    var path = Path()
     
-    private func initializeUIBezierPath() {
+    private mutating func initializePath() {
         path.move(to: self.p1)
         path.addLine(to: self.p2)
         path.addLine(to: self.p3)
         path.addLine(to: self.p4)
-        path.close()
     }
     
     init(p1: VNPoint, p2: VNPoint, p3: VNPoint, p4: VNPoint) {
@@ -33,7 +32,7 @@ struct DirectionBox: Identifiable {
         self.p3 = p3.location
         self.p4 = p4.location
         
-        initializeUIBezierPath()
+        initializePath()
     }
     
     func contains(point: VNPoint) -> Bool {

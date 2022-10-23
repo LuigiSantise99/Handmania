@@ -16,9 +16,9 @@
 		491D15B82865EF9500786AF8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 491D15B72865EF9500786AF8 /* Preview Assets.xcassets */; };
 		491D4728286F078100565982 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491D4727286F078000565982 /* Model.swift */; };
 		491D472B286F09DD00565982 /* AVCaptureVideoPreviewLayerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491D472A286F09DD00565982 /* AVCaptureVideoPreviewLayerAdapter.swift */; };
-		4943C8AE28EC7CDC00E00FF8 /* UIBezierPathAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4943C8AD28EC7CDC00E00FF8 /* UIBezierPathAdapter.swift */; };
 		4943C8B128EC88EF00E00FF8 /* DirectionBoxesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4943C8B028EC88EF00E00FF8 /* DirectionBoxesView.swift */; };
 		4961FEC028BE5482008A6502 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4961FEBF28BE5482008A6502 /* Direction.swift */; };
+		498B5BE229055BFA0025FCC7 /* DirectionBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498B5BE129055BFA0025FCC7 /* DirectionBoxView.swift */; };
 		499ED99C28EECD4C00336315 /* HandDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499ED99B28EECD4C00336315 /* HandDirection.swift */; };
 		49B47C9C290301BE0058BF2F /* AVCaptureVideoOrientationFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B47C9B290301BE0058BF2F /* AVCaptureVideoOrientationFactory.swift */; };
 		49B78B3028E5F05700AF1716 /* DirectionsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B78B2F28E5F05700AF1716 /* DirectionsModel.swift */; };
@@ -35,9 +35,9 @@
 		491D15B72865EF9500786AF8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		491D4727286F078000565982 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		491D472A286F09DD00565982 /* AVCaptureVideoPreviewLayerAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVCaptureVideoPreviewLayerAdapter.swift; sourceTree = "<group>"; };
-		4943C8AD28EC7CDC00E00FF8 /* UIBezierPathAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBezierPathAdapter.swift; sourceTree = "<group>"; };
 		4943C8B028EC88EF00E00FF8 /* DirectionBoxesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionBoxesView.swift; sourceTree = "<group>"; };
 		4961FEBF28BE5482008A6502 /* Direction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
+		498B5BE129055BFA0025FCC7 /* DirectionBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionBoxView.swift; sourceTree = "<group>"; };
 		499ED99B28EECD4C00336315 /* HandDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandDirection.swift; sourceTree = "<group>"; };
 		49B47C9B290301BE0058BF2F /* AVCaptureVideoOrientationFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVCaptureVideoOrientationFactory.swift; sourceTree = "<group>"; };
 		49B78B2F28E5F05700AF1716 /* DirectionsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionsModel.swift; sourceTree = "<group>"; };
@@ -107,7 +107,6 @@
 			isa = PBXGroup;
 			children = (
 				491D472A286F09DD00565982 /* AVCaptureVideoPreviewLayerAdapter.swift */,
-				4943C8AD28EC7CDC00E00FF8 /* UIBezierPathAdapter.swift */,
 			);
 			path = Adapters;
 			sourceTree = "<group>";
@@ -116,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				4943C8B028EC88EF00E00FF8 /* DirectionBoxesView.swift */,
+				498B5BE129055BFA0025FCC7 /* DirectionBoxView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -218,9 +218,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				498B5BE229055BFA0025FCC7 /* DirectionBoxView.swift in Sources */,
 				491B9C0A28E6FF5E006F6311 /* ScreenBounds.swift in Sources */,
 				49B47C9C290301BE0058BF2F /* AVCaptureVideoOrientationFactory.swift in Sources */,
-				4943C8AE28EC7CDC00E00FF8 /* UIBezierPathAdapter.swift in Sources */,
 				491B9C0828E6E5E5006F6311 /* DirectionBox.swift in Sources */,
 				491D472B286F09DD00565982 /* AVCaptureVideoPreviewLayerAdapter.swift in Sources */,
 				4961FEC028BE5482008A6502 /* Direction.swift in Sources */,
