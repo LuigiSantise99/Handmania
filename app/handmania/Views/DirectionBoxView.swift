@@ -18,13 +18,7 @@ struct DirectionBoxView: Shape {
     }
     
     init(p1: CGPoint, p2: CGPoint, p3: CGPoint, p4: CGPoint) {
-        // Incoming coordinates needs to be adapted to the new plane.
-        let newP1 = CGPoint(x: p1.x, y: 1 - p1.y)
-        let newP2 = CGPoint(x: p2.x, y: 1 - p2.y)
-        let newP3 = CGPoint(x: p3.x, y: 1 - p3.y)
-        let newP4 = CGPoint(x: p4.x, y: 1 - p4.y)
-        
-        initializePath(p1: newP1, p2: newP2, p3: newP3, p4: newP4)
+        initializePath(p1: p1, p2: p2, p3: p3, p4: p4)
     }
     
     func path(in rect: CGRect) -> Path {

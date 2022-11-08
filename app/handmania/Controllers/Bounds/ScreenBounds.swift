@@ -8,8 +8,8 @@
 import Vision
 
 struct ScreenBounds {
-    static let topLeft = VNPoint(x: 0, y: 1)
-    static let topRight = VNPoint(x: 1, y: 1)
-    static let bottomLeft = VNPoint(x: 0, y: 0)
-    static let bottomRight = VNPoint(x: 1, y: 0)
+    static let topLeft = VNPoint(x: 0, y: 0)
+    static let topRight = VNPoint(x: 1, y: 0)
+    static let bottomLeft = VNPoint(x: 0, y: 1)
+    static let bottomRight = VNPoint(x: 1, y: 1)
 }

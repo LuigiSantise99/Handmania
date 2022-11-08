@@ -20,6 +20,7 @@
 		4961FEC028BE5482008A6502 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4961FEBF28BE5482008A6502 /* Direction.swift */; };
 		498B5BE229055BFA0025FCC7 /* DirectionBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498B5BE129055BFA0025FCC7 /* DirectionBoxView.swift */; };
 		499ED99C28EECD4C00336315 /* HandDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499ED99B28EECD4C00336315 /* HandDirection.swift */; };
+		49A53BF429081DE500BF723B /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A53BF329081DE500BF723B /* VideoView.swift */; };
 		49B47C9C290301BE0058BF2F /* AVCaptureVideoOrientationFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B47C9B290301BE0058BF2F /* AVCaptureVideoOrientationFactory.swift */; };
 		49B78B3028E5F05700AF1716 /* DirectionsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B78B2F28E5F05700AF1716 /* DirectionsModel.swift */; };
 /* End PBXBuildFile section */
@@ -39,6 +40,7 @@
 		4961FEBF28BE5482008A6502 /* Direction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
 		498B5BE129055BFA0025FCC7 /* DirectionBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionBoxView.swift; sourceTree = "<group>"; };
 		499ED99B28EECD4C00336315 /* HandDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandDirection.swift; sourceTree = "<group>"; };
+		49A53BF329081DE500BF723B /* VideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoView.swift; sourceTree = "<group>"; };
 		49B47C9B290301BE0058BF2F /* AVCaptureVideoOrientationFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVCaptureVideoOrientationFactory.swift; sourceTree = "<group>"; };
 		49B78B2F28E5F05700AF1716 /* DirectionsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionsModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -116,6 +118,7 @@
 			children = (
 				4943C8B028EC88EF00E00FF8 /* DirectionBoxesView.swift */,
 				498B5BE129055BFA0025FCC7 /* DirectionBoxView.swift */,
+				49A53BF329081DE500BF723B /* VideoView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -228,6 +231,7 @@
 				491D15B12865EF9400786AF8 /* handmaniaApp.swift in Sources */,
 				4943C8B128EC88EF00E00FF8 /* DirectionBoxesView.swift in Sources */,
 				49B78B3028E5F05700AF1716 /* DirectionsModel.swift in Sources */,
+				49A53BF429081DE500BF723B /* VideoView.swift in Sources */,
 				491114E7286EF474002AB556 /* CameraManager.swift in Sources */,
 				499ED99C28EECD4C00336315 /* HandDirection.swift in Sources */,
 				491D4728286F078100565982 /* Model.swift in Sources */,
@@ -366,6 +370,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -396,6 +401,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (

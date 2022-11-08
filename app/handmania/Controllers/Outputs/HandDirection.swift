@@ -11,5 +11,14 @@ struct HandDirection: CustomStringConvertible {
     let direction: Direction
     var timestamp: Date
     
-    public var description: String { return "\(direction) @\(timestamp)" }
+    let formatter = DateFormatter()
+    
+    init(direction: Direction, timestamp: Date) {
+        self.direction = direction
+        self.timestamp = timestamp
+        
+        formatter.dateFormat = "HH:mm:ss:ms"
+    }
+    
+    public var description: String { return "\(direction) @\(formatter.string(from: timestamp))" }
 }
