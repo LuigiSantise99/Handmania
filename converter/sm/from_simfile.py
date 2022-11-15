@@ -98,7 +98,6 @@ def _is_a_valid_chart(chart: List[List[str]]) -> str:
     Returns:
         bool: True if the chart does not have unsupported notes, False otherwise.
     '''
-
     for note_groups in chart:
         for notes_string in note_groups:
             if '4' in notes_string:

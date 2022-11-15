@@ -3,10 +3,6 @@
 
 This module helps parsing and extracting relevant infomration from a single
 simfile specified.
-
-Todo:
-    * Upgrade `_there_are_synchronous_notes` to make it more precise.
-    * Create a private function to encode the audio file.
 '''
 
 from .from_simfile import from_simfile
