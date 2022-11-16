@@ -11,7 +11,7 @@ curl -H "Authorization: <MASTER_PASSWORD>" http://localhost:3000/songs
 
 Per la corretta esecuzione dell'operazione richiesta, è necessario specificare la master password del server in chiaro nel campo `Authorization` della richiesta HTTP.
 
-La chiamata a questo enpoint ritorna un oggetto JSON contenente i dati delle canzoni disponibili con i riferimenti al file audio e al reticolo delle note. Un esempio potrebbe essere il seguente:
+La chiamata a questo enpoint ritorna un oggetto JSON contenente i dati delle canzoni disponibili. Un esempio potrebbe essere il seguente:
 
 ```json
 [
@@ -22,9 +22,16 @@ La chiamata a questo enpoint ritorna un oggetto JSON contenente i dati delle can
         "genre": "Trance",
         "start": "88.260",
         "length": "15.260",
-        "bpms": "0.000=144.970",
-        "audio": "http://localhost:3000/song/<ID>/audio",
-        "note": "http://localhost:3000/song/<ID>/notes"
+        "bpms": "0.000=144.970"
+    },
+    {
+        "_id": "<ID>",
+        "title": "Conflicting Passions",
+        "artist": "Falcom Sound Team JDK",
+        "genre": "Electro",
+        "start": "93.960",
+        "length": "18.580",
+        "bpms":"0.000=205.001"
     }
 ]
 ```
