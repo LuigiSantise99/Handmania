@@ -21,11 +21,6 @@ class DirectionsModel: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, O
         HandDirection(direction: Direction.neutral, timestamp: Date())
     ]
     
-    func getCurrentUIInterfaceOrientation() -> UIInterfaceOrientation {
-        // FIXME: a startup il valore è nil. Serve conoscere l'orientamento di avvio.
-        return UIApplication.shared.connectedScenes.filter{ $0.activationState == .foregroundActive }.first(where: { $0 is UIWindowScene }).flatMap{ $0 as? UIWindowScene }?.windows.first(where: \.isKeyWindow)?.windowScene?.interfaceOrientation ?? .portrait
-    }
-    
     private func addCameraInput() {
         guard let device = AVCaptureDevice.DiscoverySession(
             deviceTypes: [.builtInWideAngleCamera, .builtInDualCamera, .builtInTrueDepthCamera],
@@ -42,8 +37,8 @@ class DirectionsModel: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, O
     func setVideoOrientation(orientation: AVCaptureVideoOrientation) {
         guard let connection = self.videoDataOutput.connection(with: .video),
               connection.isVideoOrientationSupported else { return }
+        
         connection.videoOrientation = orientation
-
     }
     
     private func getCameraFrames(orientation: AVCaptureVideoOrientation) {
@@ -57,8 +52,11 @@ class DirectionsModel: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, O
     
     func startCaptureSession() {
         self.addCameraInput()
-        self.getCameraFrames(orientation: AVCaptureVideoOrientationFactory.fromUIInterfaceOrientation(orientation: self.getCurrentUIInterfaceOrientation()))
-        self.captureSession.startRunning()
+        self.getCameraFrames(orientation: .portrait)
+        
+        DispatchQueue.global(qos: .background).async {
+            self.captureSession.startRunning()
+        }
     }
     
     @MainActor private func clearDirectionBoxes() {

@@ -12,18 +12,11 @@ struct ContentView: View {
     @State private var permissionGranted = false
     @StateObject private var directionModel = DirectionsModel.getInstance()
     
-    @State var orientation = DirectionsModel.getInstance().getCurrentUIInterfaceOrientation()
-    
-    let orientationChanged = NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification)
-            .makeConnectable()
-            .autoconnect()
-    
     var body: some View {
         VStack (alignment: .center) {
             if cameraManager.permissionGranted {
                 ZStack {
-                    AVCaptureVideoPreviewLayerAdapter(orientation: orientation, session: directionModel.captureSession)
-                    
+                    AVCaptureVideoPreviewLayerAdapter(session: directionModel.captureSession)
                     DirectionBoxesView(directionsModel: directionModel)
                 }
             } else {
@@ -31,11 +24,7 @@ struct ContentView: View {
             }
         }.onReceive(cameraManager.$permissionGranted, perform: { granted in
             permissionGranted = granted
-        }).onReceive(orientationChanged) { _ in
-            self.orientation = directionModel.getCurrentUIInterfaceOrientation()
-            
-            directionModel.setVideoOrientation(orientation: AVCaptureVideoOrientationFactory.fromUIInterfaceOrientation(orientation: self.orientation))
-        }.onAppear {
+        }).onAppear {
             cameraManager.requestPermission()
             directionModel.startCaptureSession()
         }
