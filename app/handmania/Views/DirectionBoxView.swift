@@ -10,15 +10,8 @@ import SwiftUI
 struct DirectionBoxView: Shape {
     private var path = Path()
     
-    private mutating func initializePath(p1: CGPoint, p2: CGPoint, p3: CGPoint, p4: CGPoint) {
-        self.path.move(to: p1)
-        self.path.addLine(to: p2)
-        self.path.addLine(to: p3)
-        self.path.addLine(to: p4)
-    }
-    
-    init(p1: CGPoint, p2: CGPoint, p3: CGPoint, p4: CGPoint) {
-        initializePath(p1: p1, p2: p2, p3: p3, p4: p4)
+    init(path: Path) {
+        self.path = path
     }
     
     func path(in rect: CGRect) -> Path {

@@ -13,7 +13,7 @@ struct DirectionBoxesView: View {
     var body: some View {
         if let directionBoxes = directionsModel.directionBoxes?.values {
             ForEach(Array(directionBoxes)) { box in
-                DirectionBoxView(p1: box.p1, p2: box.p2, p3: box.p3, p4: box.p4)
+                DirectionBoxView(path: box.path)
                     .stroke(lineWidth: 5)
                     .fill(.green)
             }

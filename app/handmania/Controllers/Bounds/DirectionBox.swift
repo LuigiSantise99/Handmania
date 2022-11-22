@@ -11,30 +11,22 @@ import SwiftUI
 
 struct DirectionBox: Identifiable {
     let id = UUID()
-    
-    let p1: CGPoint
-    let p2: CGPoint
-    let p3: CGPoint
-    let p4: CGPoint
-    
     var path = Path()
     
-    private mutating func initializePath() {
-        path.move(to: self.p1)
-        path.addLine(to: self.p2)
-        path.addLine(to: self.p3)
-        path.addLine(to: self.p4)
-    }
-    
     init(p1: VNPoint, p2: VNPoint, p3: VNPoint, p4: VNPoint) {
-        self.p1 = p1.location
-        self.p2 = p2.location
-        self.p3 = p3.location
-        self.p4 = p4.location
-        
-        initializePath()
+        self.path.move(to: p1.location)
+        self.path.addLine(to: p2.location)
+        self.path.addLine(to: p3.location)
+        self.path.addLine(to: p4.location)
     }
     
+    /**
+     Checks is the specified point is containment in the saved path.
+     
+     - Parameter point: The point to check the containment on.
+    
+     - Returns `true` if the point is in the path, `false` otherwise.
+     */
     func contains(point: VNPoint) -> Bool {
         return path.contains(point.location)
     }

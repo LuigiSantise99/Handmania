@@ -14,10 +14,14 @@
 		491D15B32865EF9400786AF8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491D15B22865EF9400786AF8 /* ContentView.swift */; };
 		491D15B52865EF9500786AF8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 491D15B42865EF9500786AF8 /* Assets.xcassets */; };
 		491D15B82865EF9500786AF8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 491D15B72865EF9500786AF8 /* Preview Assets.xcassets */; };
-		491D4728286F078100565982 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491D4727286F078000565982 /* Model.swift */; };
+		491D4728286F078100565982 /* ServerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491D4727286F078000565982 /* ServerModel.swift */; };
 		491D472B286F09DD00565982 /* AVCaptureVideoPreviewLayerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491D472A286F09DD00565982 /* AVCaptureVideoPreviewLayerAdapter.swift */; };
 		4943C8B128EC88EF00E00FF8 /* DirectionBoxesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4943C8B028EC88EF00E00FF8 /* DirectionBoxesView.swift */; };
 		4961FEC028BE5482008A6502 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4961FEBF28BE5482008A6502 /* Direction.swift */; };
+		4964CB41292D136300C424D9 /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4964CB40292D136300C424D9 /* Song.swift */; };
+		4964CB44292D14FC00C424D9 /* ServerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4964CB43292D14FC00C424D9 /* ServerError.swift */; };
+		4964CB48292D182F00C424D9 /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4964CB47292D182E00C424D9 /* Audio.swift */; };
+		4964CB4A292D18AD00C424D9 /* Notes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4964CB49292D18AD00C424D9 /* Notes.swift */; };
 		498B5BE229055BFA0025FCC7 /* DirectionBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498B5BE129055BFA0025FCC7 /* DirectionBoxView.swift */; };
 		499ED99C28EECD4C00336315 /* HandDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499ED99B28EECD4C00336315 /* HandDirection.swift */; };
 		49A53BF429081DE500BF723B /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A53BF329081DE500BF723B /* VideoView.swift */; };
@@ -33,10 +37,14 @@
 		491D15B22865EF9400786AF8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		491D15B42865EF9500786AF8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		491D15B72865EF9500786AF8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		491D4727286F078000565982 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		491D4727286F078000565982 /* ServerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerModel.swift; sourceTree = "<group>"; };
 		491D472A286F09DD00565982 /* AVCaptureVideoPreviewLayerAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVCaptureVideoPreviewLayerAdapter.swift; sourceTree = "<group>"; };
 		4943C8B028EC88EF00E00FF8 /* DirectionBoxesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionBoxesView.swift; sourceTree = "<group>"; };
 		4961FEBF28BE5482008A6502 /* Direction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
+		4964CB40292D136300C424D9 /* Song.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
+		4964CB43292D14FC00C424D9 /* ServerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerError.swift; sourceTree = "<group>"; };
+		4964CB47292D182E00C424D9 /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
+		4964CB49292D18AD00C424D9 /* Notes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notes.swift; sourceTree = "<group>"; };
 		498B5BE129055BFA0025FCC7 /* DirectionBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionBoxView.swift; sourceTree = "<group>"; };
 		499ED99B28EECD4C00336315 /* HandDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandDirection.swift; sourceTree = "<group>"; };
 		49A53BF329081DE500BF723B /* VideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoView.swift; sourceTree = "<group>"; };
@@ -82,10 +90,10 @@
 		491D15AF2865EF9400786AF8 /* handmania */ = {
 			isa = PBXGroup;
 			children = (
+				4964CB3E292D114E00C424D9 /* Server */,
 				4943C8AF28EC88D800E00FF8 /* Views */,
 				491D4729286F09AB00565982 /* Adapters */,
 				49B78B2E28E5F01600AF1716 /* Controllers */,
-				491D4727286F078000565982 /* Model.swift */,
 				491D15B02865EF9400786AF8 /* handmaniaApp.swift */,
 				491D15B22865EF9400786AF8 /* ContentView.swift */,
 				491D15B42865EF9500786AF8 /* Assets.xcassets */,
@@ -118,6 +126,26 @@
 				49A53BF329081DE500BF723B /* VideoView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		4964CB3E292D114E00C424D9 /* Server */ = {
+			isa = PBXGroup;
+			children = (
+				4964CB3F292D135B00C424D9 /* Beans */,
+				491D4727286F078000565982 /* ServerModel.swift */,
+				4964CB43292D14FC00C424D9 /* ServerError.swift */,
+			);
+			path = Server;
+			sourceTree = "<group>";
+		};
+		4964CB3F292D135B00C424D9 /* Beans */ = {
+			isa = PBXGroup;
+			children = (
+				4964CB40292D136300C424D9 /* Song.swift */,
+				4964CB47292D182E00C424D9 /* Audio.swift */,
+				4964CB49292D18AD00C424D9 /* Notes.swift */,
+			);
+			path = Beans;
 			sourceTree = "<group>";
 		};
 		49B78B2E28E5F01600AF1716 /* Controllers */ = {
@@ -211,18 +239,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				498B5BE229055BFA0025FCC7 /* DirectionBoxView.swift in Sources */,
+				4964CB44292D14FC00C424D9 /* ServerError.swift in Sources */,
 				491B9C0A28E6FF5E006F6311 /* ScreenBounds.swift in Sources */,
 				491B9C0828E6E5E5006F6311 /* DirectionBox.swift in Sources */,
 				491D472B286F09DD00565982 /* AVCaptureVideoPreviewLayerAdapter.swift in Sources */,
 				4961FEC028BE5482008A6502 /* Direction.swift in Sources */,
 				491D15B32865EF9400786AF8 /* ContentView.swift in Sources */,
 				491D15B12865EF9400786AF8 /* handmaniaApp.swift in Sources */,
+				4964CB48292D182F00C424D9 /* Audio.swift in Sources */,
 				4943C8B128EC88EF00E00FF8 /* DirectionBoxesView.swift in Sources */,
 				49B78B3028E5F05700AF1716 /* DirectionsModel.swift in Sources */,
+				4964CB41292D136300C424D9 /* Song.swift in Sources */,
+				4964CB4A292D18AD00C424D9 /* Notes.swift in Sources */,
 				49A53BF429081DE500BF723B /* VideoView.swift in Sources */,
 				491114E7286EF474002AB556 /* CameraManager.swift in Sources */,
 				499ED99C28EECD4C00336315 /* HandDirection.swift in Sources */,
-				491D4728286F078100565982 /* Model.swift in Sources */,
+				491D4728286F078100565982 /* ServerModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -361,7 +393,7 @@
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -393,7 +425,7 @@
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

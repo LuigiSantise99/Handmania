@@ -21,6 +21,9 @@ class DirectionsModel: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, O
         HandDirection(direction: Direction.neutral, timestamp: Date())
     ]
     
+    /**
+     Sets and adds to the capture session the front camera as the input.
+     */
     private func addCameraInput() {
         guard let device = AVCaptureDevice.DiscoverySession(
             deviceTypes: [.builtInWideAngleCamera, .builtInDualCamera, .builtInTrueDepthCamera],
@@ -34,35 +37,48 @@ class DirectionsModel: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, O
         self.captureSession.addInput(cameraInput)
     }
     
-    func setVideoOrientation(orientation: AVCaptureVideoOrientation) {
-        guard let connection = self.videoDataOutput.connection(with: .video),
-              connection.isVideoOrientationSupported else { return }
-        
-        connection.videoOrientation = orientation
-    }
-    
-    private func getCameraFrames(orientation: AVCaptureVideoOrientation) {
+    /**
+     Sets the handler for the camera output and links it to the session.
+     */
+    private func getCameraFrames() {
         self.videoDataOutput.videoSettings = [(kCVPixelBufferPixelFormatTypeKey as NSString) : NSNumber(value: kCVPixelFormatType_32BGRA)] as [String : Any]
         self.videoDataOutput.alwaysDiscardsLateVideoFrames = true
         self.videoDataOutput.setSampleBufferDelegate(self, queue: DispatchQueue(label: "camera_frame_processing_queue"))
         self.captureSession.addOutput(self.videoDataOutput)
         
-        self.setVideoOrientation(orientation: orientation)
+        guard let connection = self.videoDataOutput.connection(with: .video),
+              connection.isVideoOrientationSupported else { return }
+        
+        connection.videoOrientation = .portrait
     }
     
+    /**
+     Starts the capture session.
+     */
     func startCaptureSession() {
         self.addCameraInput()
-        self.getCameraFrames(orientation: .portrait)
+        self.getCameraFrames()
         
         DispatchQueue.global(qos: .background).async {
             self.captureSession.startRunning()
         }
     }
     
+    /**
+     Clears the direction boxes container in the main thread.
+     */
     @MainActor private func clearDirectionBoxes() {
         self.directionBoxes = nil
     }
     
+    /**
+     Initializes the new direction boxes container with the new user's face position in the main thread.
+     
+     - Parameter faceBoxTopLeft: The top-left corner of the user's face box.
+     - Parameter faceBoxTopRight: The top-right corner of the user's face box.
+     - Parameter faceBoxBottomLeft: The bottom-left corner of the user's face box.
+     - Parameter faceBoxBottomRight: The bottom-right corner of the user's face box.
+     */
     @MainActor private func initializeDirectionBoxes(faceBoxTopLeft: VNPoint, faceBoxTopRight: VNPoint, faceBoxBottomLeft: VNPoint, faceBoxBottomRight: VNPoint) {
         self.directionBoxes = [
             Direction.left: DirectionBox(p1: ScreenBounds.topLeft, p2: faceBoxTopLeft, p3: faceBoxBottomLeft, p4: ScreenBounds.bottomLeft),
@@ -72,6 +88,11 @@ class DirectionsModel: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, O
         ]
     }
     
+    /**
+     Builds and performs the request for the user's face box ccordinates in the specified frame.
+     
+     - Parameter image: The frame to look the user's face box for.
+     */
     private func detectFace(in image: CVPixelBuffer) {
         let faceDetectionRequest = VNDetectFaceRectanglesRequest(completionHandler: { (request: VNRequest, error: Error?) in
             DispatchQueue.main.async {
@@ -97,6 +118,13 @@ class DirectionsModel: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, O
         try? imageRequestHandler.perform([faceDetectionRequest])
     }
     
+    /**
+     Generates the middle point of the user's hand.
+     
+     - Parameter recognitionResult: The result of the human hand pose observation.
+     
+     - Returns: The middle point of the hand observation.
+     */
     private func getHandMiddlePoint(recognitionResult: VNHumanHandPoseObservation) -> VNPoint {
         let landmarks: [VNRecognizedPoint]
         
@@ -114,6 +142,13 @@ class DirectionsModel: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, O
         return VNPoint(x: meanX, y: meanY)
     }
     
+    /**
+     Detect the direction of the user's hand compared to their face position.
+     
+     - Parameter handPosition: The position of the user's hand.
+     
+     - Returns: The direction of the hand with respect to the user's face.
+     */
     private func detectDirection(handPosition: VNPoint) -> Direction {
         guard let targetBoxes = self.directionBoxes else {
             print("only hands detected")
@@ -125,16 +160,29 @@ class DirectionsModel: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, O
         return result
     }
     
-    func printDetectedHandDirections() {
+    /**
+     Prints the current hand directions memorized.
+     */
+    private func printDetectedHandDirections() {
         for hand in self.hands {
             print(hand)
         }
     }
     
+    /**
+     Initializes the new hand directions in the main thread.
+     */
     @MainActor private func initializeHandDirections(hands: [HandDirection]) {
         self.hands = hands
     }
     
+    /**
+     Generates the new hand directions based on the newly detected directions.
+     
+     - Parameter directions: The newly detected directions,
+     
+     - Returns: The updated hand directions.
+     */
     private func generateUpdatedHandDirections(directions: [Direction]) -> [HandDirection]? {
         guard directions.count == 2 else {
             print("invalid number of directions")
@@ -160,6 +208,13 @@ class DirectionsModel: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, O
         return update
     }
     
+    /**
+     Extracts the direction of the user's hands with respect to their face.
+     
+     - Parameter results: The hand pose observation result.
+     
+     - Returns: The list of the detected directions.
+     */
     private func detectHandDirections(results: [VNHumanHandPoseObservation]) -> [Direction] {
         print("\(results.count) hands detected")
         
@@ -182,6 +237,11 @@ class DirectionsModel: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, O
         return directions
     }
     
+    /**
+     Builds and performs the request for the user's hands ccordinates in the specified frame.
+     
+     - Parameter image: The frame to look the user's hands for.
+     */
     private func detectHands(in image: CVPixelBuffer) {
         let handDetectionRequest = VNDetectHumanHandPoseRequest(completionHandler: { (request: VNRequest, error: Error?) in
             DispatchQueue.main.async {
@@ -200,6 +260,13 @@ class DirectionsModel: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, O
         try? imageRequestHandler.perform([handDetectionRequest])
     }
     
+    /**
+     Captures and handles the requests for the user's face box and hand positions on a frame.
+     
+     - Parameter output: The output the frame is set into.
+     - Parameter sampleBuffer: The buffer representing the current frame.
+     - Parameter connection: The connection to the capture session.
+     */
     func captureOutput(_ output: AVCaptureOutput,
                        didOutput sampleBuffer: CMSampleBuffer,
                        from connection: AVCaptureConnection) {
