@@ -37,7 +37,7 @@ app.use((req, res, next) => {
     log(`received new request for ${req.url}`)
 
     // The master password is hashed with sha256 and saved in hex.
-    if (crypto.createHash("sha256").update(password).digest("hex") != process.env.HASHED_MASTER_PASSWORD) {
+    if (!password || crypto.createHash("sha256").update(password).digest("hex") != process.env.HASHED_MASTER_PASSWORD) {
         log(`incorrect master password "${password}", requiesting authentication`)
 
         res.setHeader("WWW-Authenticate", "Basic realm=\"Access to handmaina songs API\"")
