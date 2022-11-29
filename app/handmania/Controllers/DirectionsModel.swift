@@ -171,6 +171,8 @@ class DirectionsModel: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, O
     
     /**
      Initializes the new hand directions in the main thread.
+     
+     - Parameter hands: The new hand directions.
      */
     @MainActor private func initializeHandDirections(hands: [HandDirection]) {
         self.hands = hands
