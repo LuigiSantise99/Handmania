@@ -8,6 +8,8 @@
 import AVFoundation
 
 class CameraManager : ObservableObject {
+    private static var INSTANCE: CameraManager?
+    
     @Published var permissionGranted = false
     
     /**
@@ -19,5 +21,13 @@ class CameraManager : ObservableObject {
                 self.permissionGranted = accessGranted
             }
         })
+    }
+    
+    public static func getInstance() -> CameraManager {
+        if self.INSTANCE == nil {
+            self.INSTANCE = CameraManager()
+        }
+        
+        return self.INSTANCE!
     }
 }

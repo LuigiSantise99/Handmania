@@ -53,6 +53,11 @@
       </BuildableProductRunnable>
       <EnvironmentVariables>
          <EnvironmentVariable
+            key = "APP_NAME"
+            value = "HandMania"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+         <EnvironmentVariable
             key = "SERVER_URL"
             value = "http://localhost:3000"
             isEnabled = "YES">

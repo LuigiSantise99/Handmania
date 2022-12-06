@@ -1,5 +1,5 @@
 //
-//  DirectionsModel.swift
+//  HandDirectionsManager.swift
 //  handmania
 //
 //  Created by Mattia Gallotta on 24/06/22.
@@ -10,8 +10,8 @@ import AVFoundation
 import Vision
 import UIKit
 
-class DirectionsModel: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, ObservableObject {
-    private static var INSTANCE: DirectionsModel? = nil
+class HandDirectionsManager: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, ObservableObject {
+    private static var INSTANCE: HandDirectionsManager? = nil
     let captureSession = AVCaptureSession()
     private let videoDataOutput = AVCaptureVideoDataOutput()
     
@@ -281,9 +281,9 @@ class DirectionsModel: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, O
         self.detectHands(in: frame)
     }
     
-    public static func getInstance() -> DirectionsModel {
+    public static func getInstance() -> HandDirectionsManager {
         if self.INSTANCE == nil {
-            self.INSTANCE = DirectionsModel()
+            self.INSTANCE = HandDirectionsManager()
         }
         
         return self.INSTANCE!

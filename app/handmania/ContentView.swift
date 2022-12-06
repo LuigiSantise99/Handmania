@@ -8,33 +8,35 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject private var cameraManager = CameraManager()
+    @StateObject private var cameraManager = CameraManager.getInstance()
     @State private var permissionGranted = false
-    @StateObject private var directionModel = DirectionsModel.getInstance()
+    @StateObject private var handDirectionManager = HandDirectionsManager.getInstance()
     @StateObject private var model = Model.getInstace()
+    
+    @State private var showSongsView = false
     
     var body: some View {
         VStack (alignment: .center) {
-            if cameraManager.permissionGranted {
-                List {
-                    ForEach(self.model.songs) { song in
-                        SongView(song: song).onTapGesture {
-                            print("click")
-                        }
-                    }
-                }
-                /*ZStack {
-                 AVCaptureVideoPreviewLayerAdapter(session: directionModel.captureSession)
-                 DirectionBoxesView(directionsModel: directionModel)
-                 }*/
-            } else {
-                Text("Per utilizzare l'applicazione devi fornire i permessi della camera")
-            }
+            WelcomeView(songsHaveArrived: model.songsHaveArrived)
+            
+            /*
+             if cameraManager.permissionGranted {
+             ZStack {
+             AVCaptureVideoPreviewLayerAdapter(session: handDirectionManager.captureSession)
+             
+             if let directionBoxes = handDirectionManager.directionBoxes?.values {
+             DirectionBoxesView(directionBoxes: Array(directionBoxes))
+             }
+             }
+             } else {
+             Text("Per utilizzare l'applicazione devi fornire i permessi della camera")
+             }
+             */
         }.onReceive(cameraManager.$permissionGranted, perform: { granted in
             permissionGranted = granted
         }).onAppear {
-            cameraManager.requestPermission()
-            //directionModel.startCaptureSession()
+            // cameraManager.requestPermission()
+            // handDirectionManager.startCaptureSession()
         }
     }
 }

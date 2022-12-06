@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct ServerModel {
-    private static var INSTANCE: ServerModel?
+struct ServerManager {
+    private static var INSTANCE: ServerManager?
     private static var SERVER_URL: String {
         get {
             // The server base URL is set as an environment variable.
@@ -112,9 +112,9 @@ struct ServerModel {
         return notes
     }
 
-    public static func getInstance() -> ServerModel {
+    public static func getInstance() -> ServerManager {
         if self.INSTANCE == nil {
-            self.INSTANCE = ServerModel()
+            self.INSTANCE = ServerManager()
         }
         
         return self.INSTANCE!

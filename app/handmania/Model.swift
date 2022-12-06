@@ -13,11 +13,17 @@ class Model: ObservableObject {
     private var audioCache = [String:Data]()
     private var notesCache = [String:[[String]]]()
     
+    var songsHaveArrived: Bool {
+        get {
+            songs.count > 0
+        }
+    }
+    
     init() {
         Task {
             do {
                 // The song list is retrieved from the server.
-                let songs = try await ServerModel.fetchSongs()
+                let songs = try await ServerManager.fetchSongs()
                 await self.setSongs(songs: songs)
             } catch {
                 fatalError("unexpected server error: \(error)")
@@ -48,7 +54,7 @@ class Model: ObservableObject {
         }
         
         do  {
-            let audio = try await ServerModel.fetchSongAudio(songID: songID)
+            let audio = try await ServerManager.fetchSongAudio(songID: songID)
             let audioData = Data(base64Encoded: audio.b64, options: .ignoreUnknownCharacters)
             
             audioCache[songID] = audioData
@@ -73,7 +79,7 @@ class Model: ObservableObject {
         }
         
         do  {
-            let notes = try await ServerModel.fetchSongNotes(songID: songID)
+            let notes = try await ServerManager.fetchSongNotes(songID: songID)
             
             notesCache[songID] = notes.notes
             
