@@ -29,6 +29,8 @@ struct ServerManager {
             return serverPassword
         }
     }
+    
+    private static let LOGGER = Logger(tag: String(describing: ServerManager.self))
 
     /**
      Gathers all songs information from the remote server.
@@ -42,6 +44,8 @@ struct ServerManager {
         guard let url = URL(string: "\(SERVER_URL)/songs/") else {
             throw ServerError.InvalidURL
         }
+        
+        LOGGER.log("getting \(url)...")
         
         // The password is set.
         var request = URLRequest(url: url)
@@ -71,6 +75,8 @@ struct ServerManager {
             throw ServerError.InvalidURL
         }
         
+        LOGGER.log("getting \(url)...")
+        
         // The password is set.
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
@@ -98,6 +104,8 @@ struct ServerManager {
         guard let url = URL(string: "\(SERVER_URL)/song/\(songID)/notes/") else {
             throw ServerError.InvalidURL
         }
+        
+        LOGGER.log("getting \(url)...")
         
         // The password is set.
         var request = URLRequest(url: url)

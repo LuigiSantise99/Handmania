@@ -12,8 +12,11 @@ import UIKit
 
 class HandDirectionsManager: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, ObservableObject {
     private static var INSTANCE: HandDirectionsManager? = nil
+    
+    private let logger = Logger(tag: String(describing: HandDirectionsManager.self))
     let captureSession = AVCaptureSession()
     private let videoDataOutput = AVCaptureVideoDataOutput()
+    private var captureSessionIsInitialized = false
     
     @Published var directionBoxes: [Direction : DirectionBox]?
     @Published var hands = [
@@ -29,7 +32,7 @@ class HandDirectionsManager: NSObject, AVCaptureVideoDataOutputSampleBufferDeleg
             deviceTypes: [.builtInWideAngleCamera, .builtInDualCamera, .builtInTrueDepthCamera],
             mediaType: .video,
             position: .front).devices.first else {
-            print("no front camera device found")
+            self.logger.log("no front camera device found")
             return
         }
         
@@ -56,11 +59,29 @@ class HandDirectionsManager: NSObject, AVCaptureVideoDataOutputSampleBufferDeleg
      Starts the capture session.
      */
     func startCaptureSession() {
-        self.addCameraInput()
-        self.getCameraFrames()
+        // The initialization is done once.
+        if !self.captureSessionIsInitialized {
+            self.addCameraInput()
+            self.getCameraFrames()
+            
+            self.logger.log("all good, capture session correctly initialized")
+            
+            self.captureSessionIsInitialized = true
+        }
         
         DispatchQueue.global(qos: .background).async {
+            self.logger.log("starting capture session...")
             self.captureSession.startRunning()
+        }
+    }
+    
+    /**
+     Stops the capture session.
+     */
+    func stopCaptureSession() {
+        DispatchQueue.global(qos: .background).async {
+            self.logger.log("stopping capture session...")
+            self.captureSession.stopRunning()
         }
     }
     
@@ -98,7 +119,7 @@ class HandDirectionsManager: NSObject, AVCaptureVideoDataOutputSampleBufferDeleg
             DispatchQueue.main.async {
                 if let results = request.results as? [VNFaceObservation] {
                     if results.count == 1 {
-                        print("face detected")
+                        self.logger.log("face detected")
                         let faceBox = results.first!.boundingBox
                         self.initializeDirectionBoxes(
                             faceBoxTopLeft: VNPoint(x: faceBox.minX, y: faceBox.minY),
@@ -107,7 +128,7 @@ class HandDirectionsManager: NSObject, AVCaptureVideoDataOutputSampleBufferDeleg
                             faceBoxBottomRight: VNPoint(x: faceBox.maxX, y: faceBox.maxY)
                         )
                     } else {
-                        print("no or more faces detected")
+                        self.logger.log("no or more faces detected")
                         self.clearDirectionBoxes()
                     }
                 }
@@ -131,13 +152,13 @@ class HandDirectionsManager: NSObject, AVCaptureVideoDataOutputSampleBufferDeleg
         do {
             try landmarks = Array(recognitionResult.recognizedPoints(forGroupKey: .all).values)
         } catch {
-            print("no landmarks detected")
+            self.logger.log("no landmarks detected")
             return VNPoint(x: 0, y: 0)
         }
         
         let meanX = landmarks.map{ $0.x }.reduce(0, +) / Float64(landmarks.count)
         let meanY = landmarks.map{ $0.y }.reduce(0, +) / Float64(landmarks.count)
-        print("hand detected @\(String(format: "%.4f", meanX)),\(String(format: "%.4f", meanY))")
+        self.logger.log("hand detected @\(String(format: "%.4f", meanX)),\(String(format: "%.4f", meanY))")
 
         return VNPoint(x: meanX, y: meanY)
     }
@@ -151,7 +172,7 @@ class HandDirectionsManager: NSObject, AVCaptureVideoDataOutputSampleBufferDeleg
      */
     private func detectDirection(handPosition: VNPoint) -> Direction {
         guard let targetBoxes = self.directionBoxes else {
-            print("only hands detected")
+            self.logger.log("only hands detected")
             return Direction.neutral
         }
         
@@ -165,7 +186,7 @@ class HandDirectionsManager: NSObject, AVCaptureVideoDataOutputSampleBufferDeleg
      */
     private func printDetectedHandDirections() {
         for hand in self.hands {
-            print(hand)
+            self.logger.log(String(describing: hand))
         }
     }
     
@@ -187,7 +208,7 @@ class HandDirectionsManager: NSObject, AVCaptureVideoDataOutputSampleBufferDeleg
      */
     private func generateUpdatedHandDirections(directions: [Direction]) -> [HandDirection]? {
         guard directions.count == 2 else {
-            print("invalid number of directions")
+            self.logger.log("invalid number of directions")
             return nil
         }
         
@@ -218,10 +239,10 @@ class HandDirectionsManager: NSObject, AVCaptureVideoDataOutputSampleBufferDeleg
      - Returns: The list of the detected directions.
      */
     private func detectHandDirections(results: [VNHumanHandPoseObservation]) -> [Direction] {
-        print("\(results.count) hands detected")
+        self.logger.log("\(results.count) hands detected")
         
         if results.count <= 0 {
-            print("no hands detected")
+            self.logger.log("no hands detected")
             return [Direction.neutral, Direction.neutral]
         }
         
@@ -273,7 +294,7 @@ class HandDirectionsManager: NSObject, AVCaptureVideoDataOutputSampleBufferDeleg
                        didOutput sampleBuffer: CMSampleBuffer,
                        from connection: AVCaptureConnection) {
         guard let frame = CMSampleBufferGetImageBuffer(sampleBuffer) else {
-            print("unable to get image from sample buffer")
+            self.logger.log("unable to get image from sample buffer")
             return
         }
         
