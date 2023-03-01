@@ -9,9 +9,12 @@ import Foundation
 
 class Model: ObservableObject {
     private static var INSTANCE: Model?
+    
     @Published var songs = [Song]()
+    
+    private var notesCache = [String:[[Int]]]()
     private var audioCache = [String:Data]()
-    private var notesCache = [String:[[String]]]()
+    private var thumbnailCache = [String:Data]()
     
     var songsHaveArrived: Bool {
         get {
@@ -41,39 +44,14 @@ class Model: ObservableObject {
     }
     
     /**
-     Provides the correct audio file with respect to the requested song.
-     
-     - Parameter songID: The ID of the song the audio is needed.
-     
-     - Returns: The song chart of the requested song.
-     */
-    func getSongAudio(songID: String) async -> Data {
-        // The value is first lokked into the cache.
-        if let audio = audioCache[songID] {
-            return audio
-        }
-        
-        do  {
-            let audio = try await ServerManager.fetchSongAudio(songID: songID)
-            let audioData = Data(base64Encoded: audio.b64, options: .ignoreUnknownCharacters)
-            
-            audioCache[songID] = audioData
-            
-            return audioData!
-        } catch {
-            fatalError("unexpected server error: \(error)")
-        }
-    }
-    
-    /**
      Provides the correct note chart with respect to the requested song.
      
      - Parameter songID: The ID of the song the note chart is needed.
      
-     - Returns: The song chart of the requested song.
+     - Returns: The chart of the requested song.
      */
-    func getSongNotes(songID: String) async -> [[String]] {
-        // The value is firts lokked into the cache.
+    func getSongNotes(songID: String) async -> [[Int]] {
+        // The value is first looked into the cache.
         if let notes = notesCache[songID] {
             return notes
         }
@@ -84,6 +62,56 @@ class Model: ObservableObject {
             notesCache[songID] = notes.notes
             
             return notes.notes
+        } catch {
+            fatalError("unexpected server error: \(error)")
+        }
+    }
+    
+    /**
+     Provides the correct audio file with respect to the requested song.
+     
+     - Parameter songID: The ID of the song the audio is needed.
+     
+     - Returns: The audio of the requested song.
+     */
+    func getSongAudio(songID: String) async -> Data {
+        // The value is first looked into the cache.
+        if let audio = audioCache[songID] {
+            return audio
+        }
+        
+        do  {
+            let audio = try await ServerManager.fetchSongAudio(songID: songID)
+            let audioData = Data(base64Encoded: audio.audio, options: .ignoreUnknownCharacters)
+            
+            audioCache[songID] = audioData
+            
+            return audioData!
+        } catch {
+            fatalError("unexpected server error: \(error)")
+        }
+    }
+    
+    /**
+     Provides the correct thumbnail file with respect to the requested song.
+     
+     - Parameter songID: The ID of the song the thumbnail is needed.
+     
+     - Returns: The thumbnail of the requested song.
+     */
+    func getSongThumbnail(songID: String) async -> Data {
+        // The value is first looked into the cache.
+        if let thumbnail = thumbnailCache[songID] {
+            return thumbnail
+        }
+        
+        do  {
+            let thumbnail = try await ServerManager.fetchSongThumbnail(songID: songID)
+            let thumbnailData = Data(base64Encoded: thumbnail.thumbnail, options: .ignoreUnknownCharacters)
+            
+            thumbnailCache[songID] = thumbnailData
+            
+            return thumbnailData!
         } catch {
             fatalError("unexpected server error: \(error)")
         }

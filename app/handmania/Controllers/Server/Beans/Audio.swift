@@ -7,5 +7,5 @@
 
 struct Audio: Codable, Hashable {
     let _id: String
-    let b64: String
+    let audio: String
 }

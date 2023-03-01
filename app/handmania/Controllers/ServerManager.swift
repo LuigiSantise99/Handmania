@@ -61,6 +61,36 @@ struct ServerManager {
     }
     
     /**
+     Gathers the song chart of a song from the remote server.
+     
+     - Parameter songID: The ID of the song the note chart  is needed.
+     
+     - Throws: A `InvalidURL` error, if the specified URL is not valid.
+     
+     - Returns: The song chart of the requested song.
+     */
+    static func fetchSongNotes(songID: String) async throws -> Notes {
+        // The URL is created.
+        guard let url = URL(string: "\(SERVER_URL)/songs/\(songID)/notes/") else {
+            throw ServerError.InvalidURL
+        }
+        
+        LOGGER.log("getting \(url)...")
+        
+        // The password is set.
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.setValue(SERVER_PASSWORD, forHTTPHeaderField: "Authorization")
+        
+        // Data task is created and executed.
+        let (result, _) = try await URLSession.shared.data(for: request)
+        
+        // Data is parsed and returned.
+        let notes = try JSONDecoder().decode(Notes.self, from: result)
+        return notes
+    }
+    
+    /**
      Gathers the Base64 string representing the audio of a song from the remote server.
      
      - Parameter songID: The ID of the song the audio is needed.
@@ -71,7 +101,7 @@ struct ServerManager {
      */
     static func fetchSongAudio(songID: String) async throws -> Audio {
         // The URL is created.
-        guard let url = URL(string: "\(SERVER_URL)/song/\(songID)/audio/") else {
+        guard let url = URL(string: "\(SERVER_URL)/songs/\(songID)/audio/") else {
             throw ServerError.InvalidURL
         }
         
@@ -91,17 +121,17 @@ struct ServerManager {
     }
     
     /**
-     Gathers the song chart of a song from the remote server.
+     Gathers the Base64 string representing the thumbnail of a song from the remote server.
      
-     - Parameter songID: The ID of the song the note chart  is needed.
+     - Parameter songID: The ID of the song the thumbnail is needed.
      
      - Throws: A `InvalidURL` error, if the specified URL is not valid.
      
-     - Returns: The song chart of the requested song.
+     - Returns: The thumbnail of the requested song.
      */
-    static func fetchSongNotes(songID: String) async throws -> Notes {
+    static func fetchSongThumbnail(songID: String) async throws -> Thumbnail {
         // The URL is created.
-        guard let url = URL(string: "\(SERVER_URL)/song/\(songID)/notes/") else {
+        guard let url = URL(string: "\(SERVER_URL)/songs/\(songID)/thumbnail/") else {
             throw ServerError.InvalidURL
         }
         
@@ -116,8 +146,8 @@ struct ServerManager {
         let (result, _) = try await URLSession.shared.data(for: request)
         
         // Data is parsed and returned.
-        let notes = try JSONDecoder().decode(Notes.self, from: result)
-        return notes
+        let thumbnail = try JSONDecoder().decode(Thumbnail.self, from: result)
+        return thumbnail
     }
 
     public static func getInstance() -> ServerManager {

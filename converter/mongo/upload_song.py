@@ -5,7 +5,7 @@ from mongo.errors.invalid_song_format_error import InvalidSongFromatError
 from mongo.errors.upload_failed_error import UploadFailedError
 
 
-CORRECT_SONG_KEYS = ['title', 'artist', 'genre', 'start', 'length', 'bpms', 'notes', 'b64']
+CORRECT_SONG_KEYS = ['title', 'artist', 'genre', 'preview', 'notes', 'audio', 'spn', 'thumbnail']
 
 
 def upload_song(host: str, database: str, collection: str, song: Dict[str, Any]) -> None:

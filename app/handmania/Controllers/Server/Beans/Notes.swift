@@ -7,5 +7,5 @@
 
 struct Notes: Codable, Hashable {
     let _id: String
-    let notes: [[String]]
+    let notes: [[Int]]
 }

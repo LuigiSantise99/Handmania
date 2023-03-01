@@ -11,21 +11,35 @@ import AVFoundation
 struct PlayView: View {
     var song: Song
     
-    @StateObject private var handDirectionManager = HandDirectionsManager.getInstance()
+    let cameraManager = CameraManager.getInstance()
     
+    var handDirectionManager = HandDirectionsManager.getInstance()
+    
+    @State var permissionGranted = false
+    @State private var notes: [[Int]]?
+
     var body: some View {
         ZStack {
             AVCaptureVideoPreviewLayerAdapter(session: handDirectionManager.captureSession)
             
-            if let directionBoxes = handDirectionManager.directionBoxes?.values {
-                DirectionBoxesView(directionBoxes: Array(directionBoxes))
+            if let notes = self.notes {
+                NotesView(notes: notes)
             }
-        }.onAppear {
-            // The capture session is started as soon as the view is created.
-            handDirectionManager.startCaptureSession()
+        }.task {
+            // Camera permissions are requested.
+            cameraManager.requestPermission()
+            
+            // The song notes is retrieved from the model.
+            self.notes = await Model.getInstace().getSongNotes(songID: song.id)
+        }.onReceive(cameraManager.$permissionGranted) { permissionGranted in
+            self.permissionGranted = permissionGranted
+            
+            // Once the permission is granted, the capture session is started.
+            if permissionGranted {
+                handDirectionManager.startCaptureSession()
+            }
         }.onDisappear {
             // The capture session is stopped as soon as the view is closed.
-            // FIXME: la sessione non viene chiusa correttamente.
             handDirectionManager.stopCaptureSession()
         }
         .navigationTitle(song.title)

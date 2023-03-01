@@ -11,10 +11,8 @@ struct Song: Codable, Hashable, Identifiable {
     let _id: String
     let title: String
     let artist: String
-    let genre: String?
-    let start: String
-    let length: String
-    let bpms: String
+    let genre: String
+    let preview: Preview
     
     var id: String { _id }
 }
