@@ -9,12 +9,18 @@ import Foundation
 
 class Model: ObservableObject {
     private static var INSTANCE: Model?
+    private static let LOGGER = Logger(tag: String(describing: Model.self))
+    
+    private static let START_HOLD_NOTE = 2
+    private static let END_HOLD_NOTE = 3
     
     @Published var songs = [Song]()
     
     private var notesCache = [String:[[Int]]]()
     private var audioCache = [String:Data]()
     private var thumbnailCache = [String:Data]()
+    
+    private var activeHolds = [false, false, false, false]
     
     var songsHaveArrived: Bool {
         get {
@@ -29,7 +35,7 @@ class Model: ObservableObject {
                 let songs = try await ServerManager.fetchSongs()
                 await self.setSongs(songs: songs)
             } catch {
-                fatalError("unexpected server error: \(error)")
+                Model.LOGGER.log("unexpected server error: \(error)")
             }
         }
     }
@@ -63,7 +69,8 @@ class Model: ObservableObject {
             
             return notes.notes
         } catch {
-            fatalError("unexpected server error: \(error)")
+            Model.LOGGER.log("unexpected server error: \(error)")
+            return [[Int]]()
         }
     }
     
@@ -88,7 +95,8 @@ class Model: ObservableObject {
             
             return audioData!
         } catch {
-            fatalError("unexpected server error: \(error)")
+            Model.LOGGER.log("unexpected server error: \(error)")
+            return Data()
         }
     }
     
@@ -113,8 +121,42 @@ class Model: ObservableObject {
             
             return thumbnailData!
         } catch {
-            fatalError("unexpected server error: \(error)")
+            Model.LOGGER.log("unexpected server error: \(error)")
+            return Data()
         }
+    }
+    
+    /**
+     Allows the user to update the state of an active hold.
+     
+     - Parameter note: The current note the update is based on.
+     - Parameter noteIndex: The index of the ndoe in the row.
+     */
+    func updateActiveHolds(note: Int, noteIndex: Int) {
+        guard noteIndex >= 0 && noteIndex <= 3 else {
+            fatalError("Invalid note index: \(noteIndex)")
+        }
+        
+        // If the note is a 2, the hold is started in noteIndex position.
+        if note == Model.START_HOLD_NOTE { self.activeHolds[noteIndex] = true }
+        
+        // If the note is a 3, the hold is ended in noteIndexPosition.
+        if note == Model.END_HOLD_NOTE { self.activeHolds[noteIndex] = false }
+    }
+    
+    /**
+     Allows the user to check if there is an active note at the specified index.
+     
+     - Parameter noteIndex: The index of the ndoe in the row.
+     
+     - Returns: True if there is an active hold, false otherwise.
+     */
+    func checkActiveNote(noteIndex: Int) -> Bool {
+        guard noteIndex >= 0 && noteIndex <= 3 else {
+            fatalError("Invalid note index: \(noteIndex)")
+        }
+        
+        return self.activeHolds[noteIndex]
     }
     
     public static func getInstace() -> Model {

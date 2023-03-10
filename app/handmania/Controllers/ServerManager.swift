@@ -54,9 +54,11 @@ struct ServerManager {
         
         // Data task is created and executed.
         let (result, _) = try await URLSession.shared.data(for: request)
+        LOGGER.log("\(url) responded correctly")
         
         // Data is parsed and returned.
         let songs = try JSONDecoder().decode([Song].self, from: result)
+        LOGGER.log("\(url) result unmarshalled correctly")
         return songs
     }
     
@@ -84,6 +86,7 @@ struct ServerManager {
         
         // Data task is created and executed.
         let (result, _) = try await URLSession.shared.data(for: request)
+        LOGGER.log("\(url) responded correctly")
         
         // Data is parsed and returned.
         let notes = try JSONDecoder().decode(Notes.self, from: result)
@@ -114,9 +117,11 @@ struct ServerManager {
         
         // Data task is created and executed.
         let (result, _) = try await URLSession.shared.data(for: request)
+        LOGGER.log("\(url) responded correctly")
         
         // Data is parsed and returned.
         let audio = try JSONDecoder().decode(Audio.self, from: result)
+        LOGGER.log("\(url) result unmarshalled correctly")
         return audio
     }
     
@@ -144,9 +149,11 @@ struct ServerManager {
         
         // Data task is created and executed.
         let (result, _) = try await URLSession.shared.data(for: request)
+        LOGGER.log("\(url) responded correctly")
         
         // Data is parsed and returned.
         let thumbnail = try JSONDecoder().decode(Thumbnail.self, from: result)
+        LOGGER.log("\(url) result unmarshalled correctly")
         return thumbnail
     }
 

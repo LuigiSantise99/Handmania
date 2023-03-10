@@ -23,7 +23,7 @@ struct PlayView: View {
             AVCaptureVideoPreviewLayerAdapter(session: handDirectionManager.captureSession)
             
             if let notes = self.notes {
-                NotesView(notes: notes)
+                NotesView(notes: notes, spn: song.spn)
             }
         }.task {
             // Camera permissions are requested.
@@ -31,6 +31,8 @@ struct PlayView: View {
             
             // The song notes is retrieved from the model.
             self.notes = await Model.getInstace().getSongNotes(songID: song.id)
+            
+            // TODO: inizio del gioco.
         }.onReceive(cameraManager.$permissionGranted) { permissionGranted in
             self.permissionGranted = permissionGranted
             
@@ -43,5 +45,6 @@ struct PlayView: View {
             handDirectionManager.stopCaptureSession()
         }
         .navigationTitle(song.title)
+        // TODO: disabilitare la possibilità di tornare indietro perché il gioco è iniziato.
     }
 }

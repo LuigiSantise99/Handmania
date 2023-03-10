@@ -13,6 +13,7 @@ struct Song: Codable, Hashable, Identifiable {
     let artist: String
     let genre: String
     let preview: Preview
+    let spn: Float
     
     var id: String { _id }
 }
