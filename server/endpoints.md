@@ -50,16 +50,20 @@ curl -H "Authorization: <MASTER_PASSWORD>" http://localhost:3000/songs/<ID>/note
 
 Per la corretta esecuzione dell'operazione richiesta, è necessario specificare la master password del server in chiaro nel campo `Authorization` della richiesta HTTP e l'identificativo della traccia.
 
-La chiamata a questo enpoint ritorna un oggetto JSON contenente l'identificativo della canzone e il reticolo delle note ad essa associato. Un esempio potrebbe essere il seguente:
+La chiamata a questo enpoint ritorna un oggetto JSON contenente l'identificativo della canzone e il reticolo delle note ad essa associato (ogni nota si contraddistingue per il suo indice). Un esempio potrebbe essere il seguente:
 
 ```json
 {
     "_id": "<ID>",
     "notes": [
-        [0, 0, 0, 0],
-        [1, 0, 0, 0],
-        [0, 0, 1, 0],
-        [0, 1, 0, 0],
+        {
+            "index": 0,
+            "content": [0, 0, 0, 0]
+        },
+        {
+            "index": 1,
+            "content": [0, 1, 0, 0]
+        }
     ]
 }
 ```

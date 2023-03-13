@@ -16,7 +16,7 @@ class Model: ObservableObject {
     
     @Published var songs = [Song]()
     
-    private var notesCache = [String:[[Int]]]()
+    private var notesCache = [String:[Note]]()
     private var audioCache = [String:Data]()
     private var thumbnailCache = [String:Data]()
     
@@ -56,7 +56,7 @@ class Model: ObservableObject {
      
      - Returns: The chart of the requested song.
      */
-    func getSongNotes(songID: String) async -> [[Int]] {
+    func getSongNotes(songID: String) async -> [Note] {
         // The value is first looked into the cache.
         if let notes = notesCache[songID] {
             return notes
@@ -70,7 +70,7 @@ class Model: ObservableObject {
             return notes.notes
         } catch {
             Model.LOGGER.log("unexpected server error: \(error)")
-            return [[Int]]()
+            return [Note]()
         }
     }
     

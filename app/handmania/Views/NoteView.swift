@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct NoteView: View {
-    let notes: [Int]
+    let notes: Note
 
     var body: some View {
         HStack {
             Spacer()
             
-            ForEach(self.notes.indices, id: \.self) { noteIndex in
-                let note = self.notes[noteIndex]
+            ForEach(self.notes.content.indices, id: \.self) { noteIndex in
+                let note = self.notes.content[noteIndex]
                 
                 Image(uiImage: NoteParser.parseNoteByIndex(note: note, noteIndex: noteIndex))
                     .resizable()

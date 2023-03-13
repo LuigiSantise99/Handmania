@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4904653C29BF498700BD9C1C /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4904653B29BF498700BD9C1C /* Note.swift */; };
 		491D15B12865EF9400786AF8 /* handmaniaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491D15B02865EF9400786AF8 /* handmaniaApp.swift */; };
 		491D15B32865EF9400786AF8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491D15B22865EF9400786AF8 /* ContentView.swift */; };
 		491D15B52865EF9500786AF8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 491D15B42865EF9500786AF8 /* Assets.xcassets */; };
@@ -37,6 +38,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4904653B29BF498700BD9C1C /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		491D15AD2865EF9400786AF8 /* handmania.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = handmania.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		491D15B02865EF9400786AF8 /* handmaniaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = handmaniaApp.swift; sourceTree = "<group>"; };
 		491D15B22865EF9400786AF8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -100,10 +102,10 @@
 				4943C8AF28EC88D800E00FF8 /* Views */,
 				491D4729286F09AB00565982 /* Adapters */,
 				495A8740293F73FE004C6C8F /* Controllers */,
-				491D15B02865EF9400786AF8 /* handmaniaApp.swift */,
-				491D15B22865EF9400786AF8 /* ContentView.swift */,
 				4974D7492936444E00ADFA7B /* Model.swift */,
 				49C472FC293FE4B000BAD3E0 /* Logger.swift */,
+				491D15B02865EF9400786AF8 /* handmaniaApp.swift */,
+				491D15B22865EF9400786AF8 /* ContentView.swift */,
 				491D15B42865EF9500786AF8 /* Assets.xcassets */,
 				491D15B62865EF9500786AF8 /* Preview Content */,
 			);
@@ -187,6 +189,7 @@
 				495A8749293F73FE004C6C8F /* Audio.swift */,
 				49A80B6D29AF8892001FCAD4 /* Preview.swift */,
 				49A80B6F29AF8994001FCAD4 /* Thumbnail.swift */,
+				4904653B29BF498700BD9C1C /* Note.swift */,
 			);
 			path = Beans;
 			sourceTree = "<group>";
@@ -283,6 +286,7 @@
 				492CE3FE29B8C0DA00A34966 /* NoteView.swift in Sources */,
 				495A8754293F73FE004C6C8F /* Notes.swift in Sources */,
 				49C472FB293FDBD700BAD3E0 /* PlayView.swift in Sources */,
+				4904653C29BF498700BD9C1C /* Note.swift in Sources */,
 				493AB6F0293F48080031D47D /* SongsView.swift in Sources */,
 				49CFB26829ACA832008D2709 /* NotesView.swift in Sources */,
 				491D472B286F09DD00565982 /* AVCaptureVideoPreviewLayerAdapter.swift in Sources */,

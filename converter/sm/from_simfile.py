@@ -26,11 +26,14 @@ def from_simfile(desatination: str, strict: bool = True) -> Dict[str, Any]:
                     'length': '00:01:000000'
                 },
                 'notes': [
-                    [0, 0, 0, 0],
-                    [1, 0, 0, 0],
-                    [0, 1, 0, 0],
-                    [0, 0, 1, 0],
-                    [0, 0, 0, 1]
+                    {
+                        "index": 0,
+                        "content": [0, 0, 0, 0]
+                    },
+                    {
+                        "index": 1,
+                        "content": [0, 1, 0, 0]
+                    }
                 ]
             }
 
@@ -60,6 +63,7 @@ def from_simfile(desatination: str, strict: bool = True) -> Dict[str, Any]:
         raise SongWithUnsupportedNotesError()
     
     notes = _linearize_chart_notes(notes)
+    notes = _objectify_chart_notes(notes)
 
     return {
         'title': str(file.title),
@@ -153,5 +157,34 @@ def _linearize_chart_notes(chart: List[List[str]]) -> List[int]:
 
     for row in linearized_chart:
         result.append([int(note) for note in row])
+    
+    return result
+
+def _objectify_chart_notes(chart: List[int]) -> List[Dict[str, Any]]:
+    '''Objectifies the chart note adding ids.
+
+    Args:
+        chart: (List[int]): The notes of the song.
+    
+    Returns:
+        List[Dict[str, Any]]: The objectifyed list of the notes chart.
+            [
+                {
+                    "index": 0,
+                    "content": [0, 0, 0, 0]
+                },
+                {
+                    "index": 1,
+                    "content": [0, 1, 0, 0]
+                }
+            ]
+    '''
+    result: List[Dict[str, Any]] = []
+
+    for index, row in enumerate(chart):
+        result.append({
+            "index": index,
+            "content": row
+        })
     
     return result

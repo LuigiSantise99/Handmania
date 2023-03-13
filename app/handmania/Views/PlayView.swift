@@ -16,7 +16,7 @@ struct PlayView: View {
     var handDirectionManager = HandDirectionsManager.getInstance()
     
     @State var permissionGranted = false
-    @State private var notes: [[Int]]?
+    @State private var notes: [Note]?
 
     var body: some View {
         ZStack {
