@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "491D15AC2865EF9400786AF8"
-               BuildableName = "handmania.app"
+               BuildableName = "HandMania.app"
                BlueprintName = "handmania"
                ReferencedContainer = "container:handmania.xcodeproj">
             </BuildableReference>
@@ -46,7 +46,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "491D15AC2865EF9400786AF8"
-            BuildableName = "handmania.app"
+            BuildableName = "HandMania.app"
             BlueprintName = "handmania"
             ReferencedContainer = "container:handmania.xcodeproj">
          </BuildableReference>
@@ -59,7 +59,7 @@
          </EnvironmentVariable>
          <EnvironmentVariable
             key = "SERVER_URL"
-            value = "http://localhost:3000"
+            value = "http://conan.local:3000"
             isEnabled = "YES">
          </EnvironmentVariable>
          <EnvironmentVariable
@@ -80,7 +80,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "491D15AC2865EF9400786AF8"
-            BuildableName = "handmania.app"
+            BuildableName = "HandMania.app"
             BlueprintName = "handmania"
             ReferencedContainer = "container:handmania.xcodeproj">
          </BuildableReference>

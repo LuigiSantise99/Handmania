@@ -13,7 +13,7 @@ struct SongsView: View {
     var body: some View {
         NavigationStack {
             List(self.songs) { song in
-                NavigationLink(destination: PlayView(song: song)) {
+                NavigationLink(destination: MainView(song: song)) {
                     SongView(song: song)
                 }
             }

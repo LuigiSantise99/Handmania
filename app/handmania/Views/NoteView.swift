@@ -17,10 +17,10 @@ struct NoteView: View {
             ForEach(self.notes.content.indices, id: \.self) { noteIndex in
                 let note = self.notes.content[noteIndex]
                 
-                Image(uiImage: NoteParser.parseNoteByIndex(note: note, noteIndex: noteIndex))
+                NoteParser.parseNoteByIndex(note: note, noteIndex: noteIndex)
                     .resizable()
-                    .frame(width: 64.0, height: 64.0)
-                    .padding(15)
+                    .frame(width: 60.0, height: 60.0)
+                    .padding()
                 
                 Spacer()
             }

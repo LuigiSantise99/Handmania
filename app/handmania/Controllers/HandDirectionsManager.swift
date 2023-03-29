@@ -12,11 +12,15 @@ import UIKit
 
 class HandDirectionsManager: NSObject, AVCaptureVideoDataOutputSampleBufferDelegate, ObservableObject {
     private static var INSTANCE: HandDirectionsManager? = nil
+    private static let NOTE_SCORE = 10;
+    private static let EMPTY_NOTE = [false, false, false, false]
     
     private let logger = Logger(tag: String(describing: HandDirectionsManager.self))
     let captureSession = AVCaptureSession()
     private let videoDataOutput = AVCaptureVideoDataOutput()
     private var captureSessionIsInitialized = false
+    
+    private var activeHolds = [Date(), Date(), Date(), Date()]
     
     @Published var directionBoxes: [Direction : DirectionBox]?
     @Published var hands = [
@@ -135,7 +139,7 @@ class HandDirectionsManager: NSObject, AVCaptureVideoDataOutputSampleBufferDeleg
                 }
             }
         })
-
+        
         let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: image, orientation: .down, options: [:])
         try? imageRequestHandler.perform([faceDetectionRequest])
     }
@@ -160,7 +164,7 @@ class HandDirectionsManager: NSObject, AVCaptureVideoDataOutputSampleBufferDeleg
         let meanX = landmarks.map{ $0.x }.reduce(0, +) / Float64(landmarks.count)
         let meanY = landmarks.map{ $0.y }.reduce(0, +) / Float64(landmarks.count)
         self.logger.log("hand detected @\(String(format: "%.4f", meanX)),\(String(format: "%.4f", meanY))")
-
+        
         return VNPoint(x: meanX, y: meanY)
     }
     
@@ -222,7 +226,7 @@ class HandDirectionsManager: NSObject, AVCaptureVideoDataOutputSampleBufferDeleg
         for (i, value) in update.enumerated() {
             let equals = self.hands.filter{ $0.direction == value.direction }
             let j = self.hands.firstIndex{ $0.timestamp == equals.map{ $0.timestamp }.min() } ?? -1
-
+            
             if j > -1 {
                 update[i].timestamp = self.hands[j].timestamp
             }
@@ -301,6 +305,88 @@ class HandDirectionsManager: NSObject, AVCaptureVideoDataOutputSampleBufferDeleg
         
         self.detectFace(in: frame)
         self.detectHands(in: frame)
+    }
+    
+    /**
+     Converts the note to the correspondent direction.
+     
+     - Parameter noteIndex: The index of the note in the array.
+     
+     - Returns: The correct direction.
+     */
+    private func convertNoteToDirection(noteIndex: Int) -> Direction {
+        switch noteIndex {
+        case 0:
+            return Direction.left
+        case 1:
+            return Direction.down
+        case 2:
+            return Direction.up
+        case 3:
+            return Direction.right
+        default:
+            return Direction.neutral
+        }
+    }
+    
+    /**
+     Allows the user to get the score based on the hand direction.
+     
+     - Parameter note: The current note row.
+     - Parameter timeWindow: The tolearnce time window.
+     
+     - Returns: The score based on the note row.
+     */
+    func checkExpectedDirections(notes: Note, timeWindow: Float) -> (Int, [Bool]) {
+        let currentTimestamp = Date()
+        let noteArray = notes.content
+        
+        // If there are no notes, do nothing.
+        if noteArray.reduce(0, +) == 0 {
+            logger.log("(SCORE) Empty note row, skipping score calculation")
+            return (0, HandDirectionsManager.EMPTY_NOTE)
+        }
+        
+        var score = 0
+        var correctNotes = [false, false, false, false]
+        
+        for (i, note) in noteArray.enumerated() {
+            if note == 0 {
+                continue
+            }
+            
+            let noteDirection = self.convertNoteToDirection(noteIndex: i)
+            logger.log("(SCORE) Detected expected note \(noteDirection)")
+            
+            let handContainingTheDirection = self.hands.firstIndex(where: { $0.direction == noteDirection })
+            logger.log("(SCORE) Direction stored @ hands[\(String(describing: handContainingTheDirection))]")
+            
+            if let handIndex = handContainingTheDirection {
+                let handTimestamp = self.hands[handIndex].timestamp
+                logger.log("(SCORE) Note expected @ \(currentTimestamp), hand in position since \(handTimestamp); time difference: \(Float(abs(currentTimestamp.timeIntervalSinceReferenceDate - handTimestamp.timeIntervalSinceReferenceDate)))")
+                
+                if Float(abs(currentTimestamp.timeIntervalSinceReferenceDate - handTimestamp.timeIntervalSinceReferenceDate)) <= timeWindow {
+                    // Verify if the hand direction was set in the time window.
+                    if note == 1 {
+                        score += HandDirectionsManager.NOTE_SCORE
+                        correctNotes[i] = true
+                    }
+                    
+                    // The current timestamp is saved in the hold notes array.
+                    if note == 2 {
+                        self.activeHolds[i] = currentTimestamp
+                    }
+                }
+                
+                // Verify if the hand direction was set in the saved hold timestamp with tolerance.
+                if note == 3 && (Float(abs(handTimestamp.timeIntervalSinceReferenceDate - self.activeHolds[i].timeIntervalSinceReferenceDate)) <= timeWindow) {
+                    score += HandDirectionsManager.NOTE_SCORE
+                    correctNotes[i] = true
+                }
+            }
+        }
+        
+        return (score, correctNotes)
     }
     
     public static func getInstance() -> HandDirectionsManager {

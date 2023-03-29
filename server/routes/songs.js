@@ -7,9 +7,6 @@ require("dotenv").config()
 // Express router initialization.
 const router = express.Router()
 
-// MongoClient initialization.
-const mongoClient = new mongo.MongoClient(process.env.DB_CONNECTION_STRING)
-
 // The logger is imported and initialized.
 const Logger = require("../utils/logger")
 const logger = new Logger("songs")
@@ -19,6 +16,8 @@ const logger = new Logger("songs")
  */
 router.get("/", async (_, res) => {
     logger.log("requested all songs")
+
+    const mongoClient = new mongo.MongoClient(process.env.DB_CONNECTION_STRING)
 
     let songs = []
     try {
@@ -47,6 +46,8 @@ router.get("/:id/notes", async (req, res) => {
     let songId = req.params.id
     logger.log(`requested notes of song ${songId}`)
 
+    const mongoClient = new mongo.MongoClient(process.env.DB_CONNECTION_STRING)
+
     let notes = {}
     try {
         await mongoClient.connect()
@@ -74,6 +75,8 @@ router.get("/:id/audio", async (req, res) => {
     let songId = req.params.id
     logger.log(`requested audio of song ${songId}`)
 
+    const mongoClient = new mongo.MongoClient(process.env.DB_CONNECTION_STRING)
+
     let audio = {}
     try {
         await mongoClient.connect()
@@ -100,6 +103,8 @@ router.get("/:id/audio", async (req, res) => {
 router.get("/:id/thumbnail", async (req, res) => {
     let songId = req.params.id
     logger.log(`requested thumbnail of song ${songId}`)
+
+    const mongoClient = new mongo.MongoClient(process.env.DB_CONNECTION_STRING)
 
     let thumbnail = {}
     try {

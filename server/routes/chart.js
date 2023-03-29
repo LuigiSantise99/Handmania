@@ -7,9 +7,6 @@ require("dotenv").config()
 // Express router initialization.
 const router = express.Router()
 
-// MongoClient initialization.
-const mongoClient = new mongo.MongoClient(process.env.DB_CONNECTION_STRING)
-
 // The logger is imported and initialized.
 const Logger = require("../utils/logger")
 const logger = new Logger("chart")
@@ -21,8 +18,11 @@ router.get("/:id", async (req, res) => {
     let songId = req.params.id
     logger.log("requested chart")
 
+    const mongoClient = new mongo.MongoClient(process.env.DB_CONNECTION_STRING)
+
     let chart = []
     try {
+        mongoClient = new mongo.MongoClient(process.env.DB_CONNECTION_STRING)
         await mongoClient.connect()
 
         const cursor = mongoClient.db(process.env.DB_NAME).collection(process.env.CHART_DB_COLLECTION_NAME).find(
@@ -48,6 +48,8 @@ router.use(express.json());
 router.post("/:id", async (req, res) => {
     let songId = req.params.id
     logger.log("submitted new chart entry")
+
+    const mongoClient = new mongo.MongoClient(process.env.DB_CONNECTION_STRING)
 
     // The request body should contain only the name and the score.
     if (JSON.stringify(Object.keys(req.body).sort()) != JSON.stringify(['name', 'score'])) {

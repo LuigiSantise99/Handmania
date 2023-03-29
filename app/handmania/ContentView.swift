@@ -25,20 +25,25 @@ struct ContentView: View {
     var body: some View {
         VStack (alignment: .center) {
             NavigationStack {
-                VStack {
-                    Image("Logo")
+                VStack(alignment: .center) {
+                    Image("logo")
                         .resizable()
                         .frame(width: 256.0, height: 256.0)
                     Text(appName)
                         .font(.system(size: 36))
+                        .multilineTextAlignment(.center)
                         .padding()
                     Text("Progetto di \"Sviluppo di Applicazioni per Dispositivi Mobili\"")
                         .font(.system(size: 20))
+                        .multilineTextAlignment(.center)
                     Text("Gallotta, Santise")
                         .font(.system(size: 20))
+                        .multilineTextAlignment(.center)
+                        .padding()
                     
                     if model.songsHaveArrived {
                         NavigationLink("Inizia a giocare!", destination: SongsView(songs: Model.getInstace().songs))
+                            .multilineTextAlignment(.center)
                             .padding()
                     }
                 }

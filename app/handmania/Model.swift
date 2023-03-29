@@ -9,12 +9,18 @@ import Foundation
 
 class Model: ObservableObject {
     private static var INSTANCE: Model?
-    private static let LOGGER = Logger(tag: String(describing: Model.self))
     
-    private static let START_HOLD_NOTE = 2
-    private static let END_HOLD_NOTE = 3
+    static let START_HOLD_NOTE = 2
+    static let END_HOLD_NOTE = 3
+    
+    private let logger = Logger(tag: String(describing: Model.self))
     
     @Published var songs = [Song]()
+    @Published var score = 0
+    @Published var gameStarted = false
+    @Published var gameEnded = false
+    @Published var scoreSubmitted = false
+    @Published var correctNotes = [false, false, false, false]
     
     private var notesCache = [String:[Note]]()
     private var audioCache = [String:Data]()
@@ -35,7 +41,7 @@ class Model: ObservableObject {
                 let songs = try await ServerManager.fetchSongs()
                 await self.setSongs(songs: songs)
             } catch {
-                Model.LOGGER.log("unexpected server error: \(error)")
+                logger.log("unexpected server error: \(error)")
             }
         }
     }
@@ -69,7 +75,7 @@ class Model: ObservableObject {
             
             return notes.notes
         } catch {
-            Model.LOGGER.log("unexpected server error: \(error)")
+            logger.log("unexpected server error: \(error)")
             return [Note]()
         }
     }
@@ -95,7 +101,7 @@ class Model: ObservableObject {
             
             return audioData!
         } catch {
-            Model.LOGGER.log("unexpected server error: \(error)")
+            logger.log("unexpected server error: \(error)")
             return Data()
         }
     }
@@ -121,7 +127,7 @@ class Model: ObservableObject {
             
             return thumbnailData!
         } catch {
-            Model.LOGGER.log("unexpected server error: \(error)")
+            logger.log("unexpected server error: \(error)")
             return Data()
         }
     }
@@ -157,6 +163,129 @@ class Model: ObservableObject {
         }
         
         return self.activeHolds[noteIndex]
+    }
+    
+    /**
+     Allows the user to get the current score.
+     
+     - Returns: The current score.
+     */
+    func getScore() -> Int {
+        return self.score
+    }
+    
+    /**
+     Allows the user to set a new score given the new points.
+     
+     - Parameter points: The points for a note in the match.
+     */
+    func updateScore(points: Int) {
+        if points > 0 {
+            logger.log("New Score: \(self.getScore())")
+        }
+        
+        self.score += points
+    }
+    
+    /**
+     Allows the user to reset the score.
+     */
+    func resetScore() {
+        self.score = 0
+    }
+    
+    /**
+     Allows the user to get the game status.
+     
+     - Returns: True if the game started, false otherwise.
+     */
+    func gameDidStarted() -> Bool {
+        return self.gameStarted
+    }
+    
+    /**
+     Allows the user to flag the game as started.
+     */
+    func startGame() {
+        self.gameStarted = true
+    }
+    
+    /**
+     Allows the user to flag the game as stopped.
+     */
+    func stopGame() {
+        self.gameStarted = false
+    }
+    
+    /**
+     Allows the user to set the notes correctly got by the user.
+     
+     - Parameter note: The curent note row
+     */
+    func setCorrectNotes(note: [Bool]) {
+        self.correctNotes = note
+    }
+    
+    /**
+     Allows the user to get the notes correctly got.
+     
+     - Returns: The notes got by the user
+     */
+    func getCorrectNotes() -> [Bool] {
+        return self.correctNotes
+    }
+    
+    /**
+     Allows the user to reset the notes correctly got.
+     */
+    func resetCorrectNotes() {
+        self.correctNotes = [false, false, false, false]
+    }
+    
+    /**
+     Allows the user to get the game status.
+     
+     - Returns: True if the game ended, false otherwise.
+     */
+    func gameDidEnded() -> Bool {
+        return self.gameEnded
+    }
+    
+    /**
+     Allows the user to flag the game as ended.
+     */
+    func endGame() {
+        self.gameEnded = true
+    }
+    
+    /**
+     Allows the user to reset the end game flag.
+     */
+    func resetEndGame() {
+        self.gameEnded = false
+    }
+    
+    /**
+     Allows the user to get the score submission status.
+     
+     - Returns: True if the score was submittted, false otherwise.
+     */
+    func scoreDidSubmitted() -> Bool {
+        return self.scoreSubmitted
+    }
+    
+    /**
+     Allows the user to flag the submission status as done.
+     */
+    func submitScore() {
+        self.scoreSubmitted = true
+    }
+    
+    /**
+     Allows the user to reset the score submission flag..
+     */
+    func resetSubmitScore() {
+        self.scoreSubmitted = false
     }
     
     public static func getInstace() -> Model {

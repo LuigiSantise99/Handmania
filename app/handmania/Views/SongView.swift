@@ -21,13 +21,9 @@ struct SongView: View {
                 .padding()
             
             VStack(alignment: .leading, spacing: 10) {
-                Text(song.title)
-                Text(song.artist)
+                Text("\(song.title) - \(song.artist)")
+                Text(song.genre)
             }
-            
-            Spacer()
-            
-            Text(song.genre)
         }
         .task {
             // The song image is fetched from the server.

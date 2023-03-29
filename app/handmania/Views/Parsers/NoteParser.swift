@@ -5,12 +5,12 @@
 //  Created by Mattia Gallotta on 09/03/23.
 //
 
-import UIKit
+import SwiftUI
 
 struct NoteParser {
     private static let directions = [
         "left",
-        "down",
+        "bottom",
         "up",
         "right",
     ]
@@ -27,6 +27,21 @@ struct NoteParser {
     }
     
     /**
+     Returns the correct asset name given the note index.
+     
+     - Parameter noteIndex: The index of the note.
+     
+     - Returns: The correct asset name.
+     */
+    static func getNoteImageName(noteIndex: Int) -> String {
+        guard noteIndex >= 0 && noteIndex <= 3 else {
+            fatalError("Invalid note index: \(noteIndex)")
+        }
+        
+        return "\(directions[noteIndex])_arrow"
+    }
+    
+    /**
      Allows to parse a note index to the appropriate image.
      
      - Parameter note: The note to parse
@@ -34,7 +49,7 @@ struct NoteParser {
      
      - Returns: The correct note image.
      */
-    static func parseNoteByIndex(note: Int, noteIndex: Int) -> UIImage {
+    static func parseNoteByIndex(note: Int, noteIndex: Int) -> Image {
         guard noteIndex >= 0 && noteIndex <= 3 else {
             fatalError("Invalid note index: \(noteIndex)")
         }
@@ -42,17 +57,19 @@ struct NoteParser {
         // If the note is a start or end hold, the state is updated.
         if note > 1 { Model.getInstace().updateActiveHolds(note: note, noteIndex: noteIndex) }
         
-        var correctImage: UIImage? = nil
+        var correctImage: Image? = nil
         
-        if (note > 0) {
-            correctImage = UIImage(systemName: "arrow.\(directions[noteIndex])")
+        if (note > 0 && note < 3) {
+            correctImage = Image(self.getNoteImageName(noteIndex: noteIndex))
         }
         
-        // If the note is a zero and there is an active hold, the hold symbol is placed.
-        if (note == 0 && Model.getInstace().checkActiveNote(noteIndex: noteIndex)) {
-            correctImage = UIImage(systemName: "line.diagonal")
+        // If the note is three or a zero and there is an active hold, the hold symbol is placed.
+        if (note == 3 || (note == 0 && Model.getInstace().checkActiveNote(noteIndex: noteIndex))) {
+            correctImage = Image("\(self.getNoteImageName(noteIndex: noteIndex))_hold")
         }
         
-        return correctImage ?? UIImage()
+        correctImage = correctImage ?? Image("empty_arrow")
+        
+        return correctImage!.resizable()
     }
 }

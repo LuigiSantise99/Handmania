@@ -8,11 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		4904653C29BF498700BD9C1C /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4904653B29BF498700BD9C1C /* Note.swift */; };
+		491A324F29D328E5003F22E5 /* NumberParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491A324E29D328E5003F22E5 /* NumberParser.swift */; };
 		491D15B12865EF9400786AF8 /* handmaniaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491D15B02865EF9400786AF8 /* handmaniaApp.swift */; };
 		491D15B32865EF9400786AF8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491D15B22865EF9400786AF8 /* ContentView.swift */; };
 		491D15B52865EF9500786AF8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 491D15B42865EF9500786AF8 /* Assets.xcassets */; };
 		491D15B82865EF9500786AF8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 491D15B72865EF9500786AF8 /* Preview Assets.xcassets */; };
 		491D472B286F09DD00565982 /* AVCaptureVideoPreviewLayerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491D472A286F09DD00565982 /* AVCaptureVideoPreviewLayerAdapter.swift */; };
+		4921845729D494EA00BA2A89 /* FinalScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4921845629D494EA00BA2A89 /* FinalScoreView.swift */; };
+		4921845929D4A0BC00BA2A89 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4921845829D4A0BC00BA2A89 /* MainView.swift */; };
 		492CE3FE29B8C0DA00A34966 /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492CE3FD29B8C0DA00A34966 /* NoteView.swift */; };
 		493AB6F0293F48080031D47D /* SongsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493AB6EF293F48080031D47D /* SongsView.swift */; };
 		495A8751293F73FE004C6C8F /* ScreenBounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495A8742293F73FE004C6C8F /* ScreenBounds.swift */; };
@@ -28,23 +31,29 @@
 		495A875C293F73FE004C6C8F /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495A8750293F73FE004C6C8F /* Direction.swift */; };
 		4974D74A2936444E00ADFA7B /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4974D7492936444E00ADFA7B /* Model.swift */; };
 		4974D74F29365A2600ADFA7B /* SongView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4974D74E29365A2600ADFA7B /* SongView.swift */; };
+		49A4D30029CDB8BF003BF88D /* CountDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A4D2FF29CDB8BF003BF88D /* CountDownView.swift */; };
 		49A53BF429081DE500BF723B /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A53BF329081DE500BF723B /* VideoView.swift */; };
 		49A80B6E29AF8892001FCAD4 /* Preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A80B6D29AF8892001FCAD4 /* Preview.swift */; };
 		49A80B7029AF8994001FCAD4 /* Thumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A80B6F29AF8994001FCAD4 /* Thumbnail.swift */; };
 		49B408CF29B9D3D400C51D98 /* NoteParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B408CE29B9D3D400C51D98 /* NoteParser.swift */; };
+		49BE294E29CB214A00E17546 /* PointsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BE294D29CB214A00E17546 /* PointsView.swift */; };
 		49C472FB293FDBD700BAD3E0 /* PlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C472FA293FDBD700BAD3E0 /* PlayView.swift */; };
 		49C472FD293FE4B000BAD3E0 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C472FC293FE4B000BAD3E0 /* Logger.swift */; };
 		49CFB26829ACA832008D2709 /* NotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CFB26729ACA832008D2709 /* NotesView.swift */; };
+		49FA9A3929C0B2F000B36225 /* OffNotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49FA9A3829C0B2F000B36225 /* OffNotesView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4904653B29BF498700BD9C1C /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
-		491D15AD2865EF9400786AF8 /* handmania.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = handmania.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		491A324E29D328E5003F22E5 /* NumberParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberParser.swift; sourceTree = "<group>"; };
+		491D15AD2865EF9400786AF8 /* HandMania.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HandMania.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		491D15B02865EF9400786AF8 /* handmaniaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = handmaniaApp.swift; sourceTree = "<group>"; };
 		491D15B22865EF9400786AF8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		491D15B42865EF9500786AF8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		491D15B72865EF9500786AF8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		491D472A286F09DD00565982 /* AVCaptureVideoPreviewLayerAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVCaptureVideoPreviewLayerAdapter.swift; sourceTree = "<group>"; };
+		4921845629D494EA00BA2A89 /* FinalScoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalScoreView.swift; sourceTree = "<group>"; };
+		4921845829D4A0BC00BA2A89 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		492CE3FD29B8C0DA00A34966 /* NoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteView.swift; sourceTree = "<group>"; };
 		493AB6EF293F48080031D47D /* SongsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongsView.swift; sourceTree = "<group>"; };
 		495A8742293F73FE004C6C8F /* ScreenBounds.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenBounds.swift; sourceTree = "<group>"; };
@@ -60,13 +69,16 @@
 		495A8750293F73FE004C6C8F /* Direction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
 		4974D7492936444E00ADFA7B /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		4974D74E29365A2600ADFA7B /* SongView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongView.swift; sourceTree = "<group>"; };
+		49A4D2FF29CDB8BF003BF88D /* CountDownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountDownView.swift; sourceTree = "<group>"; };
 		49A53BF329081DE500BF723B /* VideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoView.swift; sourceTree = "<group>"; };
 		49A80B6D29AF8892001FCAD4 /* Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preview.swift; sourceTree = "<group>"; };
 		49A80B6F29AF8994001FCAD4 /* Thumbnail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Thumbnail.swift; sourceTree = "<group>"; };
 		49B408CE29B9D3D400C51D98 /* NoteParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteParser.swift; sourceTree = "<group>"; };
+		49BE294D29CB214A00E17546 /* PointsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointsView.swift; sourceTree = "<group>"; };
 		49C472FA293FDBD700BAD3E0 /* PlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayView.swift; sourceTree = "<group>"; };
 		49C472FC293FE4B000BAD3E0 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		49CFB26729ACA832008D2709 /* NotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesView.swift; sourceTree = "<group>"; };
+		49FA9A3829C0B2F000B36225 /* OffNotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffNotesView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,7 +103,7 @@
 		491D15AE2865EF9400786AF8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				491D15AD2865EF9400786AF8 /* handmania.app */,
+				491D15AD2865EF9400786AF8 /* HandMania.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -137,6 +149,11 @@
 				4974D74E29365A2600ADFA7B /* SongView.swift */,
 				49C472FA293FDBD700BAD3E0 /* PlayView.swift */,
 				492CE3FD29B8C0DA00A34966 /* NoteView.swift */,
+				49FA9A3829C0B2F000B36225 /* OffNotesView.swift */,
+				49BE294D29CB214A00E17546 /* PointsView.swift */,
+				49A4D2FF29CDB8BF003BF88D /* CountDownView.swift */,
+				4921845629D494EA00BA2A89 /* FinalScoreView.swift */,
+				4921845829D4A0BC00BA2A89 /* MainView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -207,6 +224,7 @@
 			isa = PBXGroup;
 			children = (
 				49B408CE29B9D3D400C51D98 /* NoteParser.swift */,
+				491A324E29D328E5003F22E5 /* NumberParser.swift */,
 			);
 			path = Parsers;
 			sourceTree = "<group>";
@@ -228,7 +246,7 @@
 			);
 			name = handmania;
 			productName = handmania;
-			productReference = 491D15AD2865EF9400786AF8 /* handmania.app */;
+			productReference = 491D15AD2865EF9400786AF8 /* HandMania.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -282,15 +300,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				495A875A293F73FE004C6C8F /* ServerManager.swift in Sources */,
+				491A324F29D328E5003F22E5 /* NumberParser.swift in Sources */,
 				49C472FD293FE4B000BAD3E0 /* Logger.swift in Sources */,
 				492CE3FE29B8C0DA00A34966 /* NoteView.swift in Sources */,
 				495A8754293F73FE004C6C8F /* Notes.swift in Sources */,
 				49C472FB293FDBD700BAD3E0 /* PlayView.swift in Sources */,
+				49FA9A3929C0B2F000B36225 /* OffNotesView.swift in Sources */,
 				4904653C29BF498700BD9C1C /* Note.swift in Sources */,
 				493AB6F0293F48080031D47D /* SongsView.swift in Sources */,
+				4921845929D4A0BC00BA2A89 /* MainView.swift in Sources */,
 				49CFB26829ACA832008D2709 /* NotesView.swift in Sources */,
 				491D472B286F09DD00565982 /* AVCaptureVideoPreviewLayerAdapter.swift in Sources */,
 				495A8752293F73FE004C6C8F /* DirectionBox.swift in Sources */,
+				4921845729D494EA00BA2A89 /* FinalScoreView.swift in Sources */,
+				49BE294E29CB214A00E17546 /* PointsView.swift in Sources */,
 				495A875B293F73FE004C6C8F /* HandDirection.swift in Sources */,
 				49A80B6E29AF8892001FCAD4 /* Preview.swift in Sources */,
 				495A8751293F73FE004C6C8F /* ScreenBounds.swift in Sources */,
@@ -302,6 +325,7 @@
 				4974D74A2936444E00ADFA7B /* Model.swift in Sources */,
 				49A80B7029AF8994001FCAD4 /* Thumbnail.swift in Sources */,
 				495A8755293F73FE004C6C8F /* Song.swift in Sources */,
+				49A4D30029CDB8BF003BF88D /* CountDownView.swift in Sources */,
 				495A875C293F73FE004C6C8F /* Direction.swift in Sources */,
 				49B408CF29B9D3D400C51D98 /* NoteParser.swift in Sources */,
 				495A8753293F73FE004C6C8F /* ServerError.swift in Sources */,
@@ -452,7 +476,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = it.unimi.di.ewlab.handmania;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = HandMania;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -484,7 +508,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = it.unimi.di.ewlab.handmania;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = HandMania;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
