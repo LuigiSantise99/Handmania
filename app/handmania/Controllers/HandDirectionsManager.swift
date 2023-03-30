@@ -86,7 +86,7 @@ class HandDirectionsManager: NSObject, AVCaptureVideoDataOutputSampleBufferDeleg
         DispatchQueue.global(qos: .background).async {
             self.logger.log("stopping capture session...")
             self.captureSession.stopRunning()
-            self.logger.log("captire session stopped")
+            self.logger.log("capture session stopped")
         }
     }
     

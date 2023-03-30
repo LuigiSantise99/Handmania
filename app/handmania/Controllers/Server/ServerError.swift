@@ -7,4 +7,5 @@
 
 enum ServerError: Error {
     case InvalidURL
+    case InvalidResponseFormat
 }

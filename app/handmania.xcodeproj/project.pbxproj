@@ -19,6 +19,9 @@
 		492CE3FE29B8C0DA00A34966 /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492CE3FD29B8C0DA00A34966 /* NoteView.swift */; };
 		493AB6F0293F48080031D47D /* SongsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493AB6EF293F48080031D47D /* SongsView.swift */; };
 		494F07F029D5784B00F6F949 /* GameStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494F07EF29D5784B00F6F949 /* GameStatus.swift */; };
+		494F07F229D5DA0500F6F949 /* ChartEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494F07F129D5DA0500F6F949 /* ChartEntry.swift */; };
+		494F07F429D5E14000F6F949 /* PermissionDeniedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494F07F329D5E14000F6F949 /* PermissionDeniedView.swift */; };
+		494F07F729D5E8C700F6F949 /* NewChartEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494F07F629D5E8C700F6F949 /* NewChartEntry.swift */; };
 		495A8751293F73FE004C6C8F /* ScreenBounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495A8742293F73FE004C6C8F /* ScreenBounds.swift */; };
 		495A8752293F73FE004C6C8F /* DirectionBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495A8743293F73FE004C6C8F /* DirectionBox.swift */; };
 		495A8753293F73FE004C6C8F /* ServerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495A8745293F73FE004C6C8F /* ServerError.swift */; };
@@ -57,6 +60,9 @@
 		492CE3FD29B8C0DA00A34966 /* NoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteView.swift; sourceTree = "<group>"; };
 		493AB6EF293F48080031D47D /* SongsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongsView.swift; sourceTree = "<group>"; };
 		494F07EF29D5784B00F6F949 /* GameStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStatus.swift; sourceTree = "<group>"; };
+		494F07F129D5DA0500F6F949 /* ChartEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartEntry.swift; sourceTree = "<group>"; };
+		494F07F329D5E14000F6F949 /* PermissionDeniedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionDeniedView.swift; sourceTree = "<group>"; };
+		494F07F629D5E8C700F6F949 /* NewChartEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewChartEntry.swift; sourceTree = "<group>"; };
 		495A8742293F73FE004C6C8F /* ScreenBounds.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenBounds.swift; sourceTree = "<group>"; };
 		495A8743293F73FE004C6C8F /* DirectionBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectionBox.swift; sourceTree = "<group>"; };
 		495A8745293F73FE004C6C8F /* ServerError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerError.swift; sourceTree = "<group>"; };
@@ -111,12 +117,11 @@
 		491D15AF2865EF9400786AF8 /* handmania */ = {
 			isa = PBXGroup;
 			children = (
-				494F07EE29D576AC00F6F949 /* Utilities */,
 				491D4729286F09AB00565982 /* Adapters */,
 				495A8740293F73FE004C6C8F /* Controllers */,
+				494F07EE29D576AC00F6F949 /* Utilities */,
+				494F07F529D5E30B00F6F949 /* Data */,
 				4943C8AF28EC88D800E00FF8 /* Views */,
-				494F07EF29D5784B00F6F949 /* GameStatus.swift */,
-				4974D7492936444E00ADFA7B /* Model.swift */,
 				491D15B02865EF9400786AF8 /* handmaniaApp.swift */,
 				491D15B22865EF9400786AF8 /* ContentView.swift */,
 				491D15B42865EF9500786AF8 /* Assets.xcassets */,
@@ -148,6 +153,7 @@
 				49507185293F457D004EC9C8 /* Groups */,
 				49B408CD29B9D3B100C51D98 /* Parsers */,
 				49C472FA293FDBD700BAD3E0 /* PlayView.swift */,
+				494F07F329D5E14000F6F949 /* PermissionDeniedView.swift */,
 				49A4D2FF29CDB8BF003BF88D /* CountDownView.swift */,
 				4921845629D494EA00BA2A89 /* FinalScoreView.swift */,
 				4921845829D4A0BC00BA2A89 /* MainView.swift */,
@@ -173,6 +179,15 @@
 				49C472FC293FE4B000BAD3E0 /* Logger.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		494F07F529D5E30B00F6F949 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				4974D7492936444E00ADFA7B /* Model.swift */,
+				494F07EF29D5784B00F6F949 /* GameStatus.swift */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 		49507185293F457D004EC9C8 /* Groups */ = {
@@ -223,6 +238,8 @@
 				495A8749293F73FE004C6C8F /* Audio.swift */,
 				49A80B6F29AF8994001FCAD4 /* Thumbnail.swift */,
 				4904653B29BF498700BD9C1C /* Note.swift */,
+				494F07F129D5DA0500F6F949 /* ChartEntry.swift */,
+				494F07F629D5E8C700F6F949 /* NewChartEntry.swift */,
 			);
 			path = Beans;
 			sourceTree = "<group>";
@@ -321,6 +338,7 @@
 				492CE3FE29B8C0DA00A34966 /* NoteView.swift in Sources */,
 				495A8754293F73FE004C6C8F /* Notes.swift in Sources */,
 				49C472FB293FDBD700BAD3E0 /* PlayView.swift in Sources */,
+				494F07F229D5DA0500F6F949 /* ChartEntry.swift in Sources */,
 				49FA9A3929C0B2F000B36225 /* OffNotesView.swift in Sources */,
 				494F07F029D5784B00F6F949 /* GameStatus.swift in Sources */,
 				4904653C29BF498700BD9C1C /* Note.swift in Sources */,
@@ -330,6 +348,7 @@
 				491D472B286F09DD00565982 /* AVCaptureVideoPreviewLayerAdapter.swift in Sources */,
 				495A8752293F73FE004C6C8F /* DirectionBox.swift in Sources */,
 				4921845729D494EA00BA2A89 /* FinalScoreView.swift in Sources */,
+				494F07F729D5E8C700F6F949 /* NewChartEntry.swift in Sources */,
 				49BE294E29CB214A00E17546 /* PointsView.swift in Sources */,
 				495A875B293F73FE004C6C8F /* HandDirection.swift in Sources */,
 				495A8751293F73FE004C6C8F /* ScreenBounds.swift in Sources */,
@@ -340,6 +359,7 @@
 				495A8757293F73FE004C6C8F /* HandDirectionsManager.swift in Sources */,
 				4974D74A2936444E00ADFA7B /* Model.swift in Sources */,
 				49A80B7029AF8994001FCAD4 /* Thumbnail.swift in Sources */,
+				494F07F429D5E14000F6F949 /* PermissionDeniedView.swift in Sources */,
 				495A8755293F73FE004C6C8F /* Song.swift in Sources */,
 				49A4D30029CDB8BF003BF88D /* CountDownView.swift in Sources */,
 				495A875C293F73FE004C6C8F /* Direction.swift in Sources */,

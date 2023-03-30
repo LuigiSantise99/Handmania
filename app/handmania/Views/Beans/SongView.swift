@@ -44,7 +44,6 @@ struct SongView: View {
      - Returns: The Image relative to the data or a default one.
      */
     private func getCorrectImage(image: Data?) -> Image {
-        print(UIScreen.main.bounds.height / UIScreen.main.scale)
         return image == nil ? Image(systemName: "photo.fill.on.rectangle.fill") : Image(uiImage: UIImage(data: image!) ?? UIImage())
     }
     
