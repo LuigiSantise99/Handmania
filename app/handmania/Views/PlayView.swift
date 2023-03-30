@@ -44,6 +44,9 @@ struct PlayView: View {
                 .scrollIndicators(ScrollIndicatorVisibility.hidden)
                 .scrollDisabled(true)
             }.task {
+                // The sleep timer is disabled so that the application does not go on stand-by since there are no input touches.
+                UIApplication.shared.isIdleTimerDisabled = true
+                
                 // The points in the model are reset.
                 Model.getInstace().resetScore()
                 
@@ -72,6 +75,9 @@ struct PlayView: View {
             }.onDisappear {
                 // The capture session is stopped as soon as the view is closed.
                 handDirectionManager.stopCaptureSession()
+                
+                // The sleep timer is enambled again.
+                UIApplication.shared.isIdleTimerDisabled = false
             }
             .navigationTitle(song.title)
             .navigationBarBackButtonHidden(true)

@@ -13,9 +13,9 @@ import UIKit
 
 struct NotesView: View {
     private static let NOTE_ROW_HEIGHT = 10.0 + 60.0 + 10.0
-    private static let HEADER_HEIGHT = 1.25 + 65 + 1.25
     private static let SCREEN_HEIGHT = UIScreen.main.bounds.size.height
-    private static let NOTE_SKIP = Int(floor((SCREEN_HEIGHT - HEADER_HEIGHT) / NOTE_ROW_HEIGHT))
+    private static let RAW_NOTE_SKIP = SCREEN_HEIGHT / NOTE_ROW_HEIGHT
+    private static let NOTE_SKIP = Int(floor(RAW_NOTE_SKIP - 0.75)) - 1
     
     private static let EMPTY_NOTE_ROW = [0, 0, 0, 0]
     private static let DELAY_BEFORE_SONG = 8.5
@@ -29,13 +29,15 @@ struct NotesView: View {
     private let logger = Logger(tag: String(describing: NotesView.self))
     
     init(notes: [Note], spn: Float, player: AVAudioPlayer) {
+        logger.log("initialization, screen height is \(NotesView.SCREEN_HEIGHT) (raw is \(NotesView.RAW_NOTE_SKIP)) so \(NotesView.NOTE_SKIP) notes fits")
+        
         self.notes = notes
         self.spn = spn
         self.timer = Timer.publish(every: TimeInterval(spn), on: .main, in: .common).autoconnect()
         self.player = player
         
         // NotesView.NOTE_SKIP times 2 rows are added for padding reasons.
-        for i in 0..<(NotesView.NOTE_SKIP * 2 - 1) {
+        for i in 0..<((NotesView.NOTE_SKIP * 2) - 1) {
             self.notes.append(Note(index: notes.count + i, content: NotesView.EMPTY_NOTE_ROW))
         }
     }

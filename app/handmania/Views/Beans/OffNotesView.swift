@@ -39,8 +39,7 @@ struct OffNotesView: View {
                 Spacer()
             }
         }
-        .padding([.top, .bottom], 3.75)
-        .padding([.leading, .trailing], 10)
+        .padding(10)
         .background(
             Color.black
                 .opacity(0.625)
