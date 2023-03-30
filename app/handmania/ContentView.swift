@@ -28,22 +28,25 @@ struct ContentView: View {
                 VStack(alignment: .center) {
                     Image("logo")
                         .resizable()
-                        .frame(width: 256.0, height: 256.0)
+                        .frame(width: 175.0, height: 175.0)
                     Text(appName)
-                        .font(.system(size: 36))
+                        .font(.title)
                         .multilineTextAlignment(.center)
                         .padding()
-                    Text("Progetto di \"Sviluppo di Applicazioni per Dispositivi Mobili\"")
-                        .font(.system(size: 20))
+                    Text("Progetto di \"Sviluppo di Applicazioni per Dispositivi Mobili\"\nGallotta, Santise")
+                        .font(.subheadline)
                         .multilineTextAlignment(.center)
-                    Text("Gallotta, Santise")
-                        .font(.system(size: 20))
-                        .multilineTextAlignment(.center)
-                        .padding()
+                        .padding([.leading, .trailing, .bottom])
                     
                     if model.songsHaveArrived {
                         NavigationLink("Inizia a giocare!", destination: SongsView(songs: Model.getInstace().songs))
+                            .buttonStyle(.borderedProminent)
                             .multilineTextAlignment(.center)
+                            .padding()
+                    } else {
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle())
+                            .scaleEffect(1.5)
                             .padding()
                     }
                 }

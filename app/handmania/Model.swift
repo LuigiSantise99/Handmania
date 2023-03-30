@@ -17,9 +17,6 @@ class Model: ObservableObject {
     
     @Published var songs = [Song]()
     @Published var score = 0
-    @Published var gameStarted = false
-    @Published var gameEnded = false
-    @Published var scoreSubmitted = false
     @Published var correctNotes = [false, false, false, false]
     
     private var notesCache = [String:[Note]]()
@@ -195,29 +192,6 @@ class Model: ObservableObject {
     }
     
     /**
-     Allows the user to get the game status.
-     
-     - Returns: True if the game started, false otherwise.
-     */
-    func gameDidStarted() -> Bool {
-        return self.gameStarted
-    }
-    
-    /**
-     Allows the user to flag the game as started.
-     */
-    func startGame() {
-        self.gameStarted = true
-    }
-    
-    /**
-     Allows the user to flag the game as stopped.
-     */
-    func stopGame() {
-        self.gameStarted = false
-    }
-    
-    /**
      Allows the user to set the notes correctly got by the user.
      
      - Parameter note: The curent note row
@@ -240,52 +214,6 @@ class Model: ObservableObject {
      */
     func resetCorrectNotes() {
         self.correctNotes = [false, false, false, false]
-    }
-    
-    /**
-     Allows the user to get the game status.
-     
-     - Returns: True if the game ended, false otherwise.
-     */
-    func gameDidEnded() -> Bool {
-        return self.gameEnded
-    }
-    
-    /**
-     Allows the user to flag the game as ended.
-     */
-    func endGame() {
-        self.gameEnded = true
-    }
-    
-    /**
-     Allows the user to reset the end game flag.
-     */
-    func resetEndGame() {
-        self.gameEnded = false
-    }
-    
-    /**
-     Allows the user to get the score submission status.
-     
-     - Returns: True if the score was submittted, false otherwise.
-     */
-    func scoreDidSubmitted() -> Bool {
-        return self.scoreSubmitted
-    }
-    
-    /**
-     Allows the user to flag the submission status as done.
-     */
-    func submitScore() {
-        self.scoreSubmitted = true
-    }
-    
-    /**
-     Allows the user to reset the score submission flag..
-     */
-    func resetSubmitScore() {
-        self.scoreSubmitted = false
     }
     
     public static func getInstace() -> Model {

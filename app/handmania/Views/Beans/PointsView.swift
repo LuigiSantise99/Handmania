@@ -17,10 +17,17 @@ struct PointsView: View {
             Text(String(format: "%4d", model.getScore()))
             Spacer()
         }
+        .foregroundColor(.white)
         .padding()
         .background(
             Color.black
                 .opacity(0.625)
         )
+    }
+    
+    struct PointsView_Previews: PreviewProvider {
+        static var previews: some View {
+            PointsView()
+        }
     }
 }

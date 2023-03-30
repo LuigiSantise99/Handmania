@@ -9,14 +9,18 @@ import SwiftUI
 import UIKit
 
 struct SongView: View {
+    @Environment (\.colorScheme) var colorScheme
+    
     let song: Song
     
     @State private var image: Data?
     
     var body: some View {
         HStack {
-            Image(uiImage: self.getCorrectImage(image: self.image))
+            self.getCorrectImage(image: self.image)
                 .resizable()
+                .foregroundColor(colorScheme == .light ? .gray : .white)
+                .foregroundColor(.white)
                 .frame(width: 64.0, height: 64.0)
                 .padding()
             
@@ -37,9 +41,16 @@ struct SongView: View {
      
      - Parameter image: The data representing the image stored.
      
-     - Returns: The UIImage relative to the data or a default one.
+     - Returns: The Image relative to the data or a default one.
      */
-    private func getCorrectImage(image: Data?) -> UIImage {
-        return (image == nil ? UIImage(systemName: "photo.fill.on.rectangle.fill") : UIImage(data: image!)) ?? UIImage()
+    private func getCorrectImage(image: Data?) -> Image {
+        print(UIScreen.main.bounds.height / UIScreen.main.scale)
+        return image == nil ? Image(systemName: "photo.fill.on.rectangle.fill") : Image(uiImage: UIImage(data: image!) ?? UIImage())
+    }
+    
+    struct SongView_Previews: PreviewProvider {
+        static var previews: some View {
+            SongView(song: Song(_id: "", title: "Titolo", artist: "Artista", genre: "Genere", preview: Preview(start: "0.051", length: "0.1"), spn: 0.005))
+        }
     }
 }

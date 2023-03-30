@@ -19,11 +19,11 @@ struct FinalScoreView: View {
                 .padding()
             
             Text("Congratulazioni! Il tuo punteggio è:")
-                .font(.system(size: 16.0))
+                .font(.body)
                 .padding()
             
             Text("\(Model.getInstace().getScore())")
-                .font(.system(size: 32.0))
+                .font(.headline)
                 .padding()
             
             Divider()
@@ -32,14 +32,14 @@ struct FinalScoreView: View {
                 .padding(.bottom)
             
             Text("Inserisci il tuo nome per aggiungere il risultato nella classifica della canzone:")
-                .font(.system(size: 16.0))
+                .font(.body)
                 .multilineTextAlignment(.center)
                 .padding()
             
             // View that allows the user to submit the score.
             TextField(text: $userName) {
                 Text("Nome utente")
-                    .font(.system(size: 16.0))
+                    .font(.body)
             }
             .textFieldStyle(.roundedBorder)
             .multilineTextAlignment(.center)
@@ -48,5 +48,11 @@ struct FinalScoreView: View {
             .frame(width: 170.0)
         }
         .navigationBarBackButtonHidden(true)
+    }
+    
+    struct FinalScoreView_Previews: PreviewProvider {
+        static var previews: some View {
+            FinalScoreView()
+        }
     }
 }

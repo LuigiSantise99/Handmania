@@ -20,4 +20,10 @@ struct SongsView: View {
             .navigationTitle("Canzoni")
         }
     }
+    
+    struct SongsView_Previews: PreviewProvider {
+        static var previews: some View {
+            SongsView(songs: [Song(_id: "1", title: "Titolo", artist: "Artista", genre: "Genere", preview: Preview(start: "0.051", length: "0.1"), spn: 0.005), Song(_id: "2", title: "Titolo", artist: "Artista", genre: "Genere", preview: Preview(start: "0.051", length: "0.1"), spn: 0.005)])
+        }
+    }
 }

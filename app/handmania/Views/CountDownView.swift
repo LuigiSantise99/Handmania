@@ -25,7 +25,7 @@ struct CountDownView: View {
             
             if self.progressive == 0 {
                 self.timer.upstream.connect().cancel()
-                Model.getInstace().startGame()
+                GameStatus.getInstace().startGame()
             }
         }
         .frame(width: container.size.width, height: container.size.height)
@@ -33,5 +33,13 @@ struct CountDownView: View {
             Color.black
                 .opacity(0.625)
         )
+    }
+    
+    struct CountDownView_Previews: PreviewProvider {
+        static var previews: some View {
+            GeometryReader { proxy in
+                CountDownView(container: proxy)
+            }
+        }
     }
 }

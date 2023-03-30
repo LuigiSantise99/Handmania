@@ -15,11 +15,10 @@ struct PlayView: View {
     
     var handDirectionManager = HandDirectionsManager.getInstance()
     
+    @StateObject var gameStatus = GameStatus.getInstace()
     @State var permissionGranted = false
     @State private var notes: [Note]?
     @State private var player: AVAudioPlayer?
-    
-    @StateObject private var model = Model.getInstace()
     
     var body: some View {
         GeometryReader { container in
@@ -30,26 +29,36 @@ struct PlayView: View {
                     OffNotesView()
                     
                     if let notes = self.notes, let player = self.player {
-                        NotesView(notes: notes, spn: song.spn, player: player)
-                            .overlay(PointsView(), alignment: .bottom)
+                        ZStack(alignment: .center) {
+                            GeometryReader { proxy in
+                                if (!gameStatus.gameDidStarted()) {
+                                    CountDownView(container: proxy)
+                                }
+                                
+                                NotesView(notes: notes, spn: song.spn, player: player)
+                                    .overlay(PointsView(), alignment: .bottom)
+                            }
+                        }
                     }
                 }
+                .scrollIndicators(ScrollIndicatorVisibility.hidden)
+                .scrollDisabled(true)
             }.task {
                 // The points in the model are reset.
-                model.resetScore()
+                Model.getInstace().resetScore()
                 
                 // Camera permissions are requested.
                 cameraManager.requestPermission()
                 
                 // The song notes is retrieved from the model.
-                self.notes = await model.getSongNotes(songID: self.song.id)
+                self.notes = await Model.getInstace().getSongNotes(songID: self.song.id)
                 
                 // The audio player is initialized.
                 do {
                     try AVAudioSession.sharedInstance().setCategory(.playback)
                     try AVAudioSession.sharedInstance().setActive(true)
                     
-                    self.player = try await AVAudioPlayer(data: model.getSongAudio(songID: self.song.id))
+                    self.player = try await AVAudioPlayer(data: Model.getInstace().getSongAudio(songID: self.song.id))
                 } catch {
                     fatalError("Unexpectet error while initializing the player")
                 }

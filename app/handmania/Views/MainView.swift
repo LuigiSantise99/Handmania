@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct MainView: View {
-    @StateObject private var model = Model.getInstace()
+    @StateObject private var gameStatus = GameStatus.getInstace()
     
     let song: Song
     
     var body: some View {
-        if (model.gameDidEnded()) {
+        if (gameStatus.gameDidEnded()) {
             FinalScoreView()
         } else {
             PlayView(song: self.song)

@@ -20,10 +20,15 @@ struct NoteView: View {
                 NoteParser.parseNoteByIndex(note: note, noteIndex: noteIndex)
                     .resizable()
                     .frame(width: 60.0, height: 60.0)
-                    .padding()
                 
                 Spacer()
             }
+        }
+    }
+    
+    struct NoteView_Previews: PreviewProvider {
+        static var previews: some View {
+            NoteView(notes: Note(index: 0, content: [1, 1, 1, 1]))
         }
     }
 }

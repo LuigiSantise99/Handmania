@@ -22,14 +22,13 @@ struct OffNotesView: View {
                 let note = Image("\(imageName)_off")
                     .resizable()
                     .frame(width: 60.0, height: 60.0)
-                    .padding()
                 
                 if correctNotes[noteIndex] {
                     ZStack(alignment: .center) {
                         // Correct note circle.
                         Image("glow_circle")
                             .resizable()
-                            .frame(width: 70.0, height: 70.0)
+                            .frame(width: 60.0, height: 60.0)
                         
                         note
                     }
@@ -40,11 +39,17 @@ struct OffNotesView: View {
                 Spacer()
             }
         }
-        .frame(height: 16)
-        .padding(32)
+        .padding([.top, .bottom], 3.75)
+        .padding([.leading, .trailing], 10)
         .background(
             Color.black
                 .opacity(0.625)
         )
+    }
+    
+    struct OffNotesView_Previews: PreviewProvider {
+        static var previews: some View {
+            OffNotesView()
+        }
     }
 }
