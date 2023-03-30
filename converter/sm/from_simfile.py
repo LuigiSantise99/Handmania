@@ -21,10 +21,6 @@ def from_simfile(desatination: str, strict: bool = True) -> Dict[str, Any]:
                 'title': 'Song title',
                 'artist': 'Artist',
                 'genre': 'Genre',
-                'preview': {
-                    'start': '00:00:000000',
-                    'length': '00:01:000000'
-                },
                 'notes': [
                     {
                         "index": 0,
@@ -69,10 +65,6 @@ def from_simfile(desatination: str, strict: bool = True) -> Dict[str, Any]:
         'title': str(file.title),
         'artist': str(file.artist),
         'genre': str(file.genre),
-        'preview': {
-            'start': file.samplestart,
-            'length': file.samplelength
-        },
         'notes': notes
     }
 

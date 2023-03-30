@@ -50,7 +50,7 @@ struct SongView: View {
     
     struct SongView_Previews: PreviewProvider {
         static var previews: some View {
-            SongView(song: Song(_id: "", title: "Titolo", artist: "Artista", genre: "Genere", preview: Preview(start: "0.051", length: "0.1"), spn: 0.005))
+            SongView(song: Song(_id: "", title: "Titolo", artist: "Artista", genre: "Genere", spn: 0.005))
         }
     }
 }

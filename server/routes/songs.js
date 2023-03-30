@@ -24,7 +24,7 @@ router.get("/", async (_, res) => {
         await mongoClient.connect()
 
         const cursor = mongoClient.db(process.env.DB_NAME).collection(process.env.SONG_DB_COLLECTION_NAME).find({},
-            { projection: { _id: 1, title: 1, artist: 1, genre: 1, preview: 1, spn: 1 } }
+            { projection: { _id: 1, title: 1, artist: 1, genre: 1, spn: 1 } }
         )
         await cursor.forEach((result) => { songs.push(result) })
     } catch (exception) {
