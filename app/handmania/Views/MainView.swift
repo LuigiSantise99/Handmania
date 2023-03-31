@@ -14,7 +14,11 @@ struct MainView: View {
     
     var body: some View {
         if (gameStatus.gameDidEnded()) {
-            FinalScoreView()
+            if (gameStatus.scoreDidSubmitted()) {
+                SongChartView(song: self.song)
+            } else {
+                FinalScoreView(songID: self.song.id)
+            }
         } else {
             PlayView(song: self.song)
         }

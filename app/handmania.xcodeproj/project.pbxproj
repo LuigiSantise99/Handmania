@@ -18,6 +18,8 @@
 		4921845929D4A0BC00BA2A89 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4921845829D4A0BC00BA2A89 /* MainView.swift */; };
 		492CE3FE29B8C0DA00A34966 /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492CE3FD29B8C0DA00A34966 /* NoteView.swift */; };
 		493AB6F0293F48080031D47D /* SongsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493AB6EF293F48080031D47D /* SongsView.swift */; };
+		4947420629D70D1A001E8B95 /* TutorialEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4947420529D70D1A001E8B95 /* TutorialEntryView.swift */; };
+		4947420829D726A3001E8B95 /* SongChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4947420729D726A3001E8B95 /* SongChartView.swift */; };
 		494F07F029D5784B00F6F949 /* GameStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494F07EF29D5784B00F6F949 /* GameStatus.swift */; };
 		494F07F229D5DA0500F6F949 /* ChartEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494F07F129D5DA0500F6F949 /* ChartEntry.swift */; };
 		494F07F429D5E14000F6F949 /* PermissionDeniedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494F07F329D5E14000F6F949 /* PermissionDeniedView.swift */; };
@@ -39,6 +41,7 @@
 		49A53BF429081DE500BF723B /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A53BF329081DE500BF723B /* VideoView.swift */; };
 		49A80B7029AF8994001FCAD4 /* Thumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A80B6F29AF8994001FCAD4 /* Thumbnail.swift */; };
 		49B408CF29B9D3D400C51D98 /* NoteParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B408CE29B9D3D400C51D98 /* NoteParser.swift */; };
+		49BC3CF029D6EB2600256FEC /* TutorialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BC3CEF29D6EB2600256FEC /* TutorialView.swift */; };
 		49BE294E29CB214A00E17546 /* PointsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BE294D29CB214A00E17546 /* PointsView.swift */; };
 		49C472FB293FDBD700BAD3E0 /* PlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C472FA293FDBD700BAD3E0 /* PlayView.swift */; };
 		49C472FD293FE4B000BAD3E0 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C472FC293FE4B000BAD3E0 /* Logger.swift */; };
@@ -59,6 +62,8 @@
 		4921845829D4A0BC00BA2A89 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		492CE3FD29B8C0DA00A34966 /* NoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteView.swift; sourceTree = "<group>"; };
 		493AB6EF293F48080031D47D /* SongsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongsView.swift; sourceTree = "<group>"; };
+		4947420529D70D1A001E8B95 /* TutorialEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialEntryView.swift; sourceTree = "<group>"; };
+		4947420729D726A3001E8B95 /* SongChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongChartView.swift; sourceTree = "<group>"; };
 		494F07EF29D5784B00F6F949 /* GameStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStatus.swift; sourceTree = "<group>"; };
 		494F07F129D5DA0500F6F949 /* ChartEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartEntry.swift; sourceTree = "<group>"; };
 		494F07F329D5E14000F6F949 /* PermissionDeniedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionDeniedView.swift; sourceTree = "<group>"; };
@@ -80,6 +85,7 @@
 		49A53BF329081DE500BF723B /* VideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoView.swift; sourceTree = "<group>"; };
 		49A80B6F29AF8994001FCAD4 /* Thumbnail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Thumbnail.swift; sourceTree = "<group>"; };
 		49B408CE29B9D3D400C51D98 /* NoteParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteParser.swift; sourceTree = "<group>"; };
+		49BC3CEF29D6EB2600256FEC /* TutorialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialView.swift; sourceTree = "<group>"; };
 		49BE294D29CB214A00E17546 /* PointsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointsView.swift; sourceTree = "<group>"; };
 		49C472FA293FDBD700BAD3E0 /* PlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayView.swift; sourceTree = "<group>"; };
 		49C472FC293FE4B000BAD3E0 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
@@ -152,11 +158,14 @@
 				494F07ED29D5729400F6F949 /* Beans */,
 				49507185293F457D004EC9C8 /* Groups */,
 				49B408CD29B9D3B100C51D98 /* Parsers */,
+				4921845829D4A0BC00BA2A89 /* MainView.swift */,
 				49C472FA293FDBD700BAD3E0 /* PlayView.swift */,
+				493AB6EF293F48080031D47D /* SongsView.swift */,
 				494F07F329D5E14000F6F949 /* PermissionDeniedView.swift */,
 				49A4D2FF29CDB8BF003BF88D /* CountDownView.swift */,
 				4921845629D494EA00BA2A89 /* FinalScoreView.swift */,
-				4921845829D4A0BC00BA2A89 /* MainView.swift */,
+				49BC3CEF29D6EB2600256FEC /* TutorialView.swift */,
+				4947420729D726A3001E8B95 /* SongChartView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -169,6 +178,7 @@
 				492CE3FD29B8C0DA00A34966 /* NoteView.swift */,
 				49FA9A3829C0B2F000B36225 /* OffNotesView.swift */,
 				49BE294D29CB214A00E17546 /* PointsView.swift */,
+				4947420529D70D1A001E8B95 /* TutorialEntryView.swift */,
 			);
 			path = Beans;
 			sourceTree = "<group>";
@@ -194,7 +204,6 @@
 			isa = PBXGroup;
 			children = (
 				49CFB26729ACA832008D2709 /* NotesView.swift */,
-				493AB6EF293F48080031D47D /* SongsView.swift */,
 			);
 			path = Groups;
 			sourceTree = "<group>";
@@ -352,10 +361,13 @@
 				49BE294E29CB214A00E17546 /* PointsView.swift in Sources */,
 				495A875B293F73FE004C6C8F /* HandDirection.swift in Sources */,
 				495A8751293F73FE004C6C8F /* ScreenBounds.swift in Sources */,
+				49BC3CF029D6EB2600256FEC /* TutorialView.swift in Sources */,
 				491D15B32865EF9400786AF8 /* ContentView.swift in Sources */,
 				495A8759293F73FE004C6C8F /* CameraManager.swift in Sources */,
 				491D15B12865EF9400786AF8 /* handmaniaApp.swift in Sources */,
+				4947420629D70D1A001E8B95 /* TutorialEntryView.swift in Sources */,
 				495A8756293F73FE004C6C8F /* Audio.swift in Sources */,
+				4947420829D726A3001E8B95 /* SongChartView.swift in Sources */,
 				495A8757293F73FE004C6C8F /* HandDirectionsManager.swift in Sources */,
 				4974D74A2936444E00ADFA7B /* Model.swift in Sources */,
 				49A80B7029AF8994001FCAD4 /* Thumbnail.swift in Sources */,

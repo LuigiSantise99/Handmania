@@ -22,12 +22,11 @@ router.get("/:id", async (req, res) => {
 
     let chart = []
     try {
-        mongoClient = new mongo.MongoClient(process.env.DB_CONNECTION_STRING)
         await mongoClient.connect()
 
         const cursor = mongoClient.db(process.env.DB_NAME).collection(process.env.CHART_DB_COLLECTION_NAME).find(
             { song_id: mongo.ObjectId(songId) })
-            .sort({score : 1}).limit(50)
+            .sort({score : -1}).limit(50)
         await cursor.forEach((result) => { chart.push(result) })
     } catch (exception) {
         logger.error(`an error occurred while gathering the chart from the DBMS - ${exception.message}`)

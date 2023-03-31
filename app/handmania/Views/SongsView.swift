@@ -18,6 +18,7 @@ struct SongsView: View {
                 }
             }
             .navigationTitle("Canzoni")
+            .navigationBarBackButtonHidden(true)
         }
     }
     

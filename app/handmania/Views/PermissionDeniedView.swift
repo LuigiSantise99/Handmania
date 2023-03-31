@@ -8,10 +8,13 @@
 import SwiftUI
 
 struct PermissionDeniedView: View {
+    @Environment (\.colorScheme) var colorScheme
+    
     var body: some View {
         VStack(alignment: .center) {
             Image(systemName: "exclamationmark.triangle")
                 .resizable()
+                .foregroundColor(colorScheme == .light ? .gray : .white)
                 .frame(width: 45.0, height: 45.0)
                 .padding([.leading, .trailing, .top])
             
