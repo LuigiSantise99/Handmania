@@ -41,7 +41,8 @@ struct ContentView: View {
                 
                 if model.songsHaveArrived {
                     NavigationLink("Inizia a giocare!", destination: SongsView(songs: Model.getInstace().songs))
-                        .buttonStyle(.borderedProminent)
+                        .buttonStyle(.bordered)
+                        .tint(.blue)
                         .padding()
                 } else {
                     ProgressView()

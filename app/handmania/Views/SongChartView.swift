@@ -29,11 +29,13 @@ struct SongChartView: View {
                 NavigationLink(destination: MainView(song: song)) {
                     Text("Riprova")
                 }
-                .buttonStyle(.borderedProminent)
+                .buttonStyle(.bordered)
+                .tint(.blue)
                 .padding(.trailing, 30.0)
                 
                 NavigationLink("Continua", destination: SongsView(songs: Model.getInstace().songs))
                 .buttonStyle(.bordered)
+                .tint(.green)
             }
             .padding()
             

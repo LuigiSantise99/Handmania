@@ -20,9 +20,9 @@ struct PermissionDeniedView: View {
             
             Text("Attenzione")
                 .font(.headline)
-                .padding()
+                .padding([.leading, .trailing, .top])
             
-            Text("Per utilizzare l'applicazione, è necessario fornire l'autorizzazione di accesso alla fotocamera. Accertati che questa sia concessa")
+            Text("Per utilizzare l'applicazione, è necessario fornire l'autorizzazione di accesso alla fotocamera; accertati che questa sia concessa")
                 .font(.body)
                 .multilineTextAlignment(.center)
                 .padding()
