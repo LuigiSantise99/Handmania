@@ -2,11 +2,9 @@
 
 HandMania è un DDR ispirato a [StepMania](http://www.stepmania.com/) che sfrutta la posizione delle mani dell'utente per giocare. L'applicativo è stato sviluppato come progetto per l'esame di "Sviluppo di Applicazioni per Dispositivi Mobili" per l'Anno Accademico 2021/2022.
 
-
 ## Prerequisiti
 
 Oltre ai tool relativi ai linguaggi di programmazione utilizzati per lo sviluppo (Python, JavaScript via NodeJS e Swift), per un corretto funzionamento è necessario installare localmente MongoDB. Quest'ultimo viene utilizzato per gestire le canzoni e la classifica.
-
 
 ## Descrizione dei moduli
 
@@ -15,7 +13,6 @@ Oltre ai tool relativi ai linguaggi di programmazione utilizzati per lo sviluppo
 - `converter`:  codice di utility per convertire un pacchetto di canzoni di StepMania in un formato accettato dal front-end e per caricare questi elementi convertiti nel database Mongo installato localmente.
 
 - `server`: codice relativo al server utilizzato per interfacciarsi con la base di dati caricata su Mongo. L'implementazione è basica e volutamente sprovvista di meccanismi di sicurezza adeguati.
-
 
 ## Passi per eseguire correttamente l'applicativo.
 
@@ -28,7 +25,6 @@ Oltre ai tool relativi ai linguaggi di programmazione utilizzati per lo sviluppo
 4. Lanciare l'esecuzione dello script relativo al server `server/index.js`. Questo è possibile anche attraverso l'apposito comando `npm` definito.
 
 5. Lanciare l'applicazione.
-
 
 ## Avvertenze
 
