@@ -17,7 +17,6 @@ struct FinalScoreView: View {
     let songID: String
     
     @State private var userName: String = ""
-    @State private var showAlert = false
     @State private var requestPending = false
     
     var body: some View {
@@ -58,7 +57,7 @@ struct FinalScoreView: View {
                         .padding([.leading, .trailing, .bottom])
                 }
                 
-                Button(action: self.uploadChartEntry) { Text("Conferma") }
+                Button(action: { self.uploadChartEntry() }) { Text("Conferma") }
                     .buttonStyle(.bordered)
                     .tint(.green)
                     .disabled(self.requestPending)
@@ -71,9 +70,7 @@ struct FinalScoreView: View {
                     .stroke(colorScheme == .light ? .gray : FinalScoreView.LIGTH_GRAY, lineWidth: 1.0)
             )
         }
-        .alert(isPresented: self.$showAlert) {
-            Alert(title: Text("Attenzione"), message: Text("Si è verificato un errore durante l'invio del punteggio. Assicurati di aver inserito un nome valido"))
-        }
+        .zIndex(.infinity)
         .navigationBarBackButtonHidden(true)
     }
     
@@ -88,7 +85,7 @@ struct FinalScoreView: View {
      Allows the user to activate the alert in the main thread.
      */
     @MainActor private func activateAlert() {
-        self.showAlert = true
+        AlertStatus.getInstace().markAlertAsToShow()
     }
     
     /**
@@ -101,7 +98,7 @@ struct FinalScoreView: View {
     /**
      Allows the user to upload the chart entry to the server.
      */
-    private func uploadChartEntry() {
+    @MainActor private func uploadChartEntry() {
         guard !self.requestPending else {
             logger.log("already a request pending, ignoring it")
             return
@@ -112,7 +109,7 @@ struct FinalScoreView: View {
         // The name should at least contain a character that is not a space or a new line.
         if name == "" {
             logger.log("empty name specified")
-            self.showAlert = true
+            AlertStatus.getInstace().markAlertAsToShow()
             return
         }
         
@@ -125,13 +122,13 @@ struct FinalScoreView: View {
                 let httpStatus = try await ServerManager.postSongChartEntry(songID: self.songID, chartEntry: NewChartEntry(name: name, score: Model.getInstace().getScore()))
                 
                 // The request is not pending anymore.
-                await self.freePendingRequest()
+                self.freePendingRequest()
                 
                 if httpStatus != 200 {
-                    await self.activateAlert()
+                    self.activateAlert()
                 } else {
                     // The score is marked as submitted, now the chart will be shown.
-                    await self.markScoreAsSubmitted()
+                    self.markScoreAsSubmitted()
                 }
             } catch {
                 logger.log("unexpected server error: \(error)")

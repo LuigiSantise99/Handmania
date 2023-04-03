@@ -21,6 +21,7 @@ struct ContentView: View {
     
     @StateObject private var handDirectionManager = HandDirectionsManager.getInstance()
     @StateObject private var model = Model.getInstace()
+    @StateObject private var alertStatus = AlertStatus.getInstace()
     
     @State private var showSheet = false
     
@@ -64,6 +65,9 @@ struct ContentView: View {
             alignment: .topTrailing)
             .sheet(isPresented: self.$showSheet) {
                 TutorialView()
+            }
+            .alert(isPresented: self.$alertStatus.showAlert) {
+                Alert(title: Text("Attenzione"), message: Text("Si è verificato un errore durante l'invio del punteggio. Assicurati di aver inserito un nome valido"))
             }
         }
     }

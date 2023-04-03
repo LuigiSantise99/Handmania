@@ -46,6 +46,7 @@
 		49C472FB293FDBD700BAD3E0 /* PlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C472FA293FDBD700BAD3E0 /* PlayView.swift */; };
 		49C472FD293FE4B000BAD3E0 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C472FC293FE4B000BAD3E0 /* Logger.swift */; };
 		49CFB26829ACA832008D2709 /* NotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CFB26729ACA832008D2709 /* NotesView.swift */; };
+		49D2BE4E29D8959B002EE416 /* AlertStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D2BE4D29D8959B002EE416 /* AlertStatus.swift */; };
 		49FA9A3929C0B2F000B36225 /* OffNotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49FA9A3829C0B2F000B36225 /* OffNotesView.swift */; };
 /* End PBXBuildFile section */
 
@@ -90,6 +91,7 @@
 		49C472FA293FDBD700BAD3E0 /* PlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayView.swift; sourceTree = "<group>"; };
 		49C472FC293FE4B000BAD3E0 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		49CFB26729ACA832008D2709 /* NotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesView.swift; sourceTree = "<group>"; };
+		49D2BE4D29D8959B002EE416 /* AlertStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertStatus.swift; sourceTree = "<group>"; };
 		49FA9A3829C0B2F000B36225 /* OffNotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffNotesView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -196,6 +198,7 @@
 			children = (
 				4974D7492936444E00ADFA7B /* Model.swift */,
 				494F07EF29D5784B00F6F949 /* GameStatus.swift */,
+				49D2BE4D29D8959B002EE416 /* AlertStatus.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -376,6 +379,7 @@
 				49A4D30029CDB8BF003BF88D /* CountDownView.swift in Sources */,
 				495A875C293F73FE004C6C8F /* Direction.swift in Sources */,
 				49B408CF29B9D3D400C51D98 /* NoteParser.swift in Sources */,
+				49D2BE4E29D8959B002EE416 /* AlertStatus.swift in Sources */,
 				495A8753293F73FE004C6C8F /* ServerError.swift in Sources */,
 				4974D74F29365A2600ADFA7B /* SongView.swift in Sources */,
 				49A53BF429081DE500BF723B /* VideoView.swift in Sources */,
