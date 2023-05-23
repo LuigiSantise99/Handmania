@@ -4,7 +4,8 @@
     "description": "A base server to handle handmania song files",
     "main": "index.js",
     "scripts": {
-        "start": "node index.js",
+        "start": "brew services start mongodb-community\nnode index.js",
+        "stop": "brew services start mongodb-community",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "keywords": [
